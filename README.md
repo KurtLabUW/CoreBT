@@ -20,7 +20,7 @@ Juampablo E. Heras Rivera†, Daniel K Low†, Wen-wai Yim, Jacob Ruzevick, Xavi
 
 
 
-
+<div align="center">
 <table>
 <tr>
 <td>
@@ -36,7 +36,7 @@ Juampablo E. Heras Rivera†, Daniel K Low†, Wen-wai Yim, Jacob Ruzevick, Xavi
 </td>
 </tr>
 </table>
-
+<div">
 
 <h2 align="center">Repo Structure</h2>
 
