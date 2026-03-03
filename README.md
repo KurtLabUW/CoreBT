@@ -16,7 +16,7 @@ for Multimodal Brain Tumor Typing</h1>
 
 Juampablo E. Heras Rivera†, Daniel K Low†, Wen-wai Yim, Jacob Ruzevick, Xavier Xiong, Mehmet Kurt*, Asma Ben Abacha*
 
-<sub>† Shared first authorship</sub>  
+† Shared first authorship
 <sub>* Shared last authorship</sub>
 
 
@@ -44,26 +44,48 @@ Juampablo E. Heras Rivera†, Daniel K Low†, Wen-wai Yim, Jacob Ruzevick, Xavi
 <table align="center">
 <tr>
 <td><strong><a href="./CLAM/">CLAM/</a></strong></td>
-<td>Data preprocessing and whole-slide tiling utilities. Includes custom artifact removal using HSV color-based segmentation and tiling pipelines for WSI patch extraction.</td>
+<td>
+Data preprocessing and whole-slide tiling utilities based on CLAM<sup>[1]</sup>. 
+Includes custom artifact removal using HSV color-based segmentation and tiling pipelines for WSI patch extraction.
+</td>
 </tr>
 
 <tr>
 <td><strong><a href="./gigapath/">gigapath/</a></strong></td>
-<td>Whole-slide histopathology embedding pipeline. Uses tiles generated from CLAM to compute slide-level embeddings via the Prov-GigaPath foundation model.</td>
+<td>
+Whole-slide histopathology embedding pipeline using the Prov-GigaPath foundation model<sup>[2]</sup>.
+Uses tiles generated from CLAM to compute slide-level embeddings.
+</td>
 </tr>
 
 <tr>
 <td><strong><a href="./NeuroVFM/">NeuroVFM/</a></strong></td>
-<td>MRI foundation model framework for multi-sequence brain MRI embedding. Produces subject-level embeddings from T1, T1c, T2, and FLAIR sequences.</td>
+<td>
+MRI foundation model framework for multi-sequence brain MRI embedding<sup>[3]</sup>.
+Produces subject-level embeddings from T1, T1c, T2, and FLAIR sequences.
+</td>
 </tr>
 
 <tr>
 <td><strong><a href="./dataset_utils/">dataset_utils/</a></strong></td>
-<td>Dataset construction, subject matching, metadata processing, and split generation utilities.</td>
+<td>
+Dataset construction, subject matching, metadata processing, and split generation utilities.
+</td>
 </tr>
 
 <tr>
 <td><strong><a href="./experiments/">experiments/</a></strong></td>
-<td>Scripts for multimodal embedding fusion and downstream tumor typing experiments, including modality ablation studies and evaluation pipelines.</td>
+<td>
+Scripts for multimodal embedding fusion and downstream tumor typing experiments, including modality ablation studies and evaluation pipelines.
+</td>
 </tr>
 </table>
+
+<br>
+
+<sub>
+[1] Lu, M.Y., Williamson, D.F.K., Chen, T.Y. et al. Data-efficient and weakly supervised computational pathology on whole-slide images. Nat Biomed Eng 5, 555–570 (2021).  <br>
+[2] Xu, Hanwen, et al. "A whole-slide foundation model for digital pathology from real-world data." Nature 630.8015 (2024): 181-188.   <br>
+[3] Kondepudi, Akhil, et al. "Health system learning achieves generalist neuroimaging models." arXiv preprint arXiv:2511.18640 (2025).
+</sub>
+
