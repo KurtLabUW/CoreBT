@@ -1,0 +1,166 @@
+[
+    {
+        "summary": {
+            "num_samples": 69,
+            "avg_loss": 1.1551444133122761
+        },
+        "global_metrics": {
+            "accuracy": 0.6521739130434783,
+            "balanced_accuracy": 0.25,
+            "f1_macro": 0.19736842105263158,
+            "f1_weighted": 0.5148741418764302,
+            "precision_macro": 0.16304347826086957,
+            "recall_macro": 0.25,
+            "auroc_macro": 0.6640259066106524,
+            "auprc_macro": 0.44511766313753776
+        },
+        "per_class_metrics": {
+            "0": {
+                "support": 4,
+                "fraction": 0.057971014492753624,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+            },
+            "1": {
+                "support": 10,
+                "fraction": 0.14492753623188406,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+            },
+            "2": {
+                "support": 10,
+                "fraction": 0.14492753623188406,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+            },
+            "3": {
+                "support": 45,
+                "fraction": 0.6521739130434783,
+                "precision": 0.6521739130434783,
+                "recall": 1.0,
+                "f1": 0.7894736842105263
+            }
+        },
+        "confusion_matrix": {
+            "labels": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "matrix": [
+                [
+                    0,
+                    0,
+                    0,
+                    4
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    10
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    10
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    45
+                ]
+            ]
+        },
+        "iteration": 1200,
+        "val_f1": 0.5148741418764302
+    },
+    {
+        "summary": {
+            "num_samples": 69,
+            "avg_loss": 1.1551444133122761
+        },
+        "global_metrics": {
+            "accuracy": 0.6521739130434783,
+            "balanced_accuracy": 0.25,
+            "f1_macro": 0.19736842105263158,
+            "f1_weighted": 0.5148741418764302,
+            "precision_macro": 0.16304347826086957,
+            "recall_macro": 0.25,
+            "auroc_macro": 0.6640259066106524,
+            "auprc_macro": 0.44511766313753776
+        },
+        "per_class_metrics": {
+            "0": {
+                "support": 4,
+                "fraction": 0.057971014492753624,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+            },
+            "1": {
+                "support": 10,
+                "fraction": 0.14492753623188406,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+            },
+            "2": {
+                "support": 10,
+                "fraction": 0.14492753623188406,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+            },
+            "3": {
+                "support": 45,
+                "fraction": 0.6521739130434783,
+                "precision": 0.6521739130434783,
+                "recall": 1.0,
+                "f1": 0.7894736842105263
+            }
+        },
+        "confusion_matrix": {
+            "labels": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "matrix": [
+                [
+                    0,
+                    0,
+                    0,
+                    4
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    10
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    10
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    45
+                ]
+            ]
+        },
+        "iteration": 1200,
+        "val_f1": 0.5148741418764302
+    }
+]

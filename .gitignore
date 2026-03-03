@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.png
+*.xlsx
+# Models
+*.pt
+*.pth
+*.ckpt
+
+# Large slide files
+*.ndpi
+*.svs
+*.tif
+
+# Logs
+logs/
+*.err
+*.out
+
+# Flash attention / compiled
+*.so
+*.o
+build/
+dist/
+
+# Archives
+*.tar
+*.tar.gz
+*.zip
+
+# W&B
+wandb/
+
+# Experiment outputs
+gigapath/prov-gigapath/tile_filtering/
+gigapath/prov-gigapath/logs/
+gigapath/prov-gigapath/sample_data/
+gigapath/prov-gigapath/outputs/
+outputs/

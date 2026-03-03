@@ -1,0 +1,776 @@
+Namespace(dataset_csv='/gscratch/kurtlab/CoreBT/dataset_utils/fusion/corebt_fusion_dataset_WHOGrade_case_sharedtest.csv', zip_path_mri='/gscratch/scrubbed/juampablo/corebt/mri_embeddings.zip', zip_path_histo='/gscratch/scrubbed/juampablo/corebt/corebt_clam_preprocessing/slide_embeddings.zip', histo_embed_dim=768, mri_embed_dim=768, batch_size=32, train_iters=1200, lr=0.001, min_lr=0.0, optim='adam', momentum=0.0, weight_decay=0.0001, eval_interval=200, model_select='best', num_workers=4, seed=42, z_score=False, output_dir='/gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/WHOGrade/fusion_mri_histo/', mri_probe_path='/gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/WHOGrade/mri_only/best_model.pth', histo_probe_path='/gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/WHOGrade/histo_only/best_model.pth')
+Found 240 files in zip
+  0%|          | 0/240 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1151: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(byte_stream, map_location="cpu")
+  1%|▏         | 3/240 [00:00<00:08, 27.47it/s]  2%|▎         | 6/240 [00:00<00:09, 25.42it/s]  4%|▍         | 9/240 [00:00<00:09, 25.53it/s]  5%|▌         | 12/240 [00:00<00:08, 25.81it/s]  6%|▋         | 15/240 [00:00<00:09, 24.80it/s]  8%|▊         | 18/240 [00:00<00:08, 25.10it/s]  9%|▉         | 21/240 [00:00<00:08, 24.70it/s] 10%|█         | 24/240 [00:00<00:08, 25.16it/s] 11%|█▏        | 27/240 [00:01<00:08, 26.29it/s] 12%|█▎        | 30/240 [00:01<00:07, 26.30it/s] 14%|█▍        | 33/240 [00:01<00:07, 26.22it/s] 15%|█▌        | 36/240 [00:01<00:07, 26.38it/s] 16%|█▋        | 39/240 [00:01<00:07, 25.64it/s] 18%|█▊        | 42/240 [00:01<00:07, 25.16it/s] 19%|█▉        | 45/240 [00:01<00:07, 25.33it/s] 20%|██        | 48/240 [00:01<00:07, 24.98it/s] 21%|██▏       | 51/240 [00:01<00:07, 25.28it/s] 22%|██▎       | 54/240 [00:02<00:07, 24.75it/s] 24%|██▍       | 57/240 [00:02<00:07, 24.99it/s] 25%|██▌       | 60/240 [00:02<00:07, 25.34it/s] 26%|██▋       | 63/240 [00:02<00:07, 24.84it/s] 28%|██▊       | 66/240 [00:02<00:06, 25.88it/s] 29%|██▉       | 69/240 [00:02<00:06, 25.36it/s] 30%|███       | 72/240 [00:02<00:06, 25.44it/s] 31%|███▏      | 75/240 [00:02<00:06, 25.04it/s] 32%|███▎      | 78/240 [00:03<00:06, 24.77it/s] 34%|███▍      | 81/240 [00:03<00:06, 24.43it/s] 35%|███▌      | 84/240 [00:03<00:06, 24.32it/s] 36%|███▋      | 87/240 [00:03<00:06, 24.97it/s] 38%|███▊      | 90/240 [00:03<00:05, 25.29it/s] 39%|███▉      | 93/240 [00:03<00:05, 24.86it/s] 40%|████      | 96/240 [00:03<00:05, 25.13it/s] 41%|████▏     | 99/240 [00:03<00:05, 24.66it/s] 42%|████▎     | 102/240 [00:04<00:05, 25.04it/s] 44%|████▍     | 105/240 [00:04<00:05, 26.04it/s] 45%|████▌     | 108/240 [00:04<00:05, 25.12it/s] 46%|████▋     | 111/240 [00:04<00:05, 24.45it/s] 48%|████▊     | 114/240 [00:04<00:05, 24.06it/s] 49%|████▉     | 117/240 [00:04<00:05, 24.59it/s] 50%|█████     | 120/240 [00:04<00:04, 24.14it/s] 51%|█████▏    | 123/240 [00:04<00:04, 24.06it/s] 52%|█████▎    | 126/240 [00:05<00:04, 25.25it/s] 54%|█████▍    | 129/240 [00:05<00:04, 25.19it/s] 55%|█████▌    | 132/240 [00:05<00:04, 25.32it/s] 56%|█████▋    | 135/240 [00:05<00:04, 25.43it/s] 57%|█████▊    | 138/240 [00:05<00:04, 25.03it/s] 59%|█████▉    | 141/240 [00:05<00:04, 24.67it/s] 60%|██████    | 144/240 [00:05<00:03, 24.10it/s] 61%|██████▏   | 147/240 [00:05<00:03, 23.90it/s] 62%|██████▎   | 150/240 [00:05<00:03, 25.13it/s] 64%|██████▍   | 153/240 [00:06<00:03, 25.39it/s] 65%|██████▌   | 156/240 [00:06<00:03, 25.43it/s] 66%|██████▋   | 159/240 [00:06<00:03, 25.49it/s] 68%|██████▊   | 162/240 [00:06<00:03, 25.77it/s] 69%|██████▉   | 165/240 [00:06<00:02, 26.07it/s] 70%|███████   | 168/240 [00:06<00:02, 26.10it/s] 71%|███████▏  | 171/240 [00:06<00:02, 25.45it/s] 72%|███████▎  | 174/240 [00:06<00:02, 26.19it/s] 74%|███████▍  | 177/240 [00:07<00:02, 26.83it/s] 75%|███████▌  | 180/240 [00:07<00:02, 25.84it/s] 76%|███████▋  | 183/240 [00:07<00:02, 25.29it/s] 78%|███████▊  | 186/240 [00:07<00:02, 25.48it/s] 79%|███████▉  | 189/240 [00:07<00:01, 26.49it/s] 80%|████████  | 192/240 [00:07<00:01, 26.37it/s] 81%|████████▏ | 195/240 [00:07<00:01, 26.50it/s] 82%|████████▎ | 198/240 [00:07<00:01, 26.99it/s] 84%|████████▍ | 201/240 [00:07<00:01, 25.94it/s] 85%|████████▌ | 204/240 [00:08<00:01, 25.33it/s] 86%|████████▋ | 207/240 [00:08<00:01, 24.93it/s] 88%|████████▊ | 210/240 [00:08<00:01, 24.66it/s] 89%|████████▉ | 213/240 [00:08<00:01, 24.43it/s] 90%|█████████ | 216/240 [00:08<00:00, 24.27it/s] 91%|█████████▏| 219/240 [00:08<00:00, 24.46it/s] 92%|█████████▎| 222/240 [00:08<00:00, 24.81it/s] 94%|█████████▍| 226/240 [00:08<00:00, 26.43it/s] 95%|█████████▌| 229/240 [00:09<00:00, 25.61it/s] 97%|█████████▋| 232/240 [00:09<00:00, 25.81it/s] 98%|█████████▊| 235/240 [00:09<00:00, 25.24it/s] 99%|█████████▉| 238/240 [00:09<00:00, 25.10it/s]100%|██████████| 240/240 [00:09<00:00, 25.26it/s]
+Loaded 239 embeddings
+Embeddings shape: torch.Size([768])
+  0%|          | 0/522 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1182: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(io.BytesIO(file_bytes))['last_layer_embed']
+ 26%|██▌       | 135/522 [00:00<00:00, 1348.86it/s] 52%|█████▏    | 273/522 [00:00<00:00, 1362.79it/s] 79%|███████▉  | 413/522 [00:00<00:00, 1378.86it/s]100%|██████████| 522/522 [00:00<00:00, 1375.38it/s]
+  0%|[31m          [0m| 0/89 [00:00<?, ?it/s]100%|[31m██████████[0m| 89/89 [00:00<00:00, 50940.65it/s]
+Found 240 files in zip
+  0%|          | 0/240 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1151: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(byte_stream, map_location="cpu")
+  2%|▏         | 4/240 [00:00<00:07, 32.13it/s]  3%|▎         | 8/240 [00:00<00:08, 28.41it/s]  5%|▍         | 11/240 [00:00<00:08, 27.58it/s]  6%|▌         | 14/240 [00:00<00:08, 26.23it/s]  7%|▋         | 17/240 [00:00<00:08, 25.38it/s]  8%|▊         | 20/240 [00:00<00:08, 25.60it/s] 10%|▉         | 23/240 [00:00<00:08, 25.88it/s] 11%|█         | 26/240 [00:00<00:08, 26.07it/s] 12%|█▏        | 29/240 [00:01<00:07, 26.89it/s] 13%|█▎        | 32/240 [00:01<00:08, 25.90it/s] 15%|█▍        | 35/240 [00:01<00:07, 26.81it/s] 16%|█▌        | 38/240 [00:01<00:07, 26.03it/s] 17%|█▋        | 41/240 [00:01<00:07, 25.40it/s] 18%|█▊        | 44/240 [00:01<00:07, 25.58it/s] 20%|█▉        | 47/240 [00:01<00:07, 25.17it/s] 21%|██        | 50/240 [00:01<00:07, 25.54it/s] 22%|██▏       | 53/240 [00:02<00:07, 25.09it/s] 23%|██▎       | 56/240 [00:02<00:07, 25.42it/s] 25%|██▍       | 59/240 [00:02<00:07, 25.71it/s] 26%|██▌       | 62/240 [00:02<00:07, 25.31it/s] 27%|██▋       | 65/240 [00:02<00:06, 26.26it/s] 28%|██▊       | 68/240 [00:02<00:06, 25.57it/s] 30%|██▉       | 71/240 [00:02<00:06, 25.72it/s] 31%|███       | 74/240 [00:02<00:06, 25.44it/s] 32%|███▏      | 77/240 [00:02<00:06, 25.13it/s] 33%|███▎      | 80/240 [00:03<00:06, 24.80it/s] 35%|███▍      | 83/240 [00:03<00:06, 24.65it/s] 36%|███▌      | 86/240 [00:03<00:06, 25.28it/s] 37%|███▋      | 89/240 [00:03<00:05, 25.75it/s] 38%|███▊      | 92/240 [00:03<00:05, 25.20it/s] 40%|███▉      | 95/240 [00:03<00:05, 24.89it/s] 41%|████      | 98/240 [00:03<00:05, 25.14it/s] 42%|████▏     | 101/240 [00:03<00:05, 25.49it/s] 43%|████▎     | 104/240 [00:04<00:05, 25.79it/s] 45%|████▍     | 107/240 [00:04<00:05, 25.89it/s] 46%|████▌     | 110/240 [00:04<00:05, 25.04it/s] 47%|████▋     | 113/240 [00:04<00:05, 24.68it/s] 48%|████▊     | 116/240 [00:04<00:04, 25.01it/s] 50%|████▉     | 119/240 [00:04<00:04, 24.64it/s] 51%|█████     | 122/240 [00:04<00:04, 24.23it/s] 52%|█████▏    | 125/240 [00:04<00:04, 24.72it/s] 53%|█████▎    | 128/240 [00:05<00:04, 25.68it/s] 55%|█████▍    | 131/240 [00:05<00:04, 25.82it/s] 56%|█████▌    | 134/240 [00:05<00:04, 26.09it/s] 57%|█████▋    | 137/240 [00:05<00:03, 25.98it/s] 58%|█████▊    | 140/240 [00:05<00:03, 25.35it/s] 60%|█████▉    | 143/240 [00:05<00:03, 24.93it/s] 61%|██████    | 146/240 [00:05<00:03, 24.48it/s] 62%|██████▏   | 149/240 [00:05<00:03, 25.69it/s] 63%|██████▎   | 152/240 [00:05<00:03, 26.58it/s] 65%|██████▍   | 155/240 [00:06<00:03, 25.62it/s] 66%|██████▌   | 158/240 [00:06<00:03, 25.60it/s] 67%|██████▋   | 161/240 [00:06<00:02, 26.45it/s] 68%|██████▊   | 164/240 [00:06<00:02, 26.57it/s] 70%|██████▉   | 167/240 [00:06<00:02, 25.83it/s] 71%|███████   | 170/240 [00:06<00:02, 26.07it/s] 72%|███████▏  | 173/240 [00:06<00:02, 26.25it/s] 73%|███████▎  | 176/240 [00:06<00:02, 26.87it/s] 75%|███████▍  | 179/240 [00:06<00:02, 26.61it/s] 76%|███████▌  | 182/240 [00:07<00:02, 25.72it/s] 77%|███████▋  | 185/240 [00:07<00:02, 25.82it/s] 78%|███████▊  | 188/240 [00:07<00:02, 25.80it/s] 80%|███████▉  | 191/240 [00:07<00:01, 26.24it/s] 81%|████████  | 194/240 [00:07<00:01, 25.66it/s] 82%|████████▎ | 198/240 [00:07<00:01, 26.97it/s] 84%|████████▍ | 201/240 [00:07<00:01, 26.04it/s] 85%|████████▌ | 204/240 [00:07<00:01, 25.36it/s] 86%|████████▋ | 207/240 [00:08<00:01, 24.78it/s] 88%|████████▊ | 210/240 [00:08<00:01, 24.33it/s] 89%|████████▉ | 213/240 [00:08<00:01, 24.04it/s] 90%|█████████ | 216/240 [00:08<00:01, 23.84it/s] 91%|█████████▏| 219/240 [00:08<00:00, 24.17it/s] 92%|█████████▎| 222/240 [00:08<00:00, 24.55it/s] 94%|█████████▍| 226/240 [00:08<00:00, 26.29it/s] 95%|█████████▌| 229/240 [00:08<00:00, 25.44it/s] 97%|█████████▋| 232/240 [00:09<00:00, 25.69it/s] 98%|█████████▊| 235/240 [00:09<00:00, 25.17it/s] 99%|█████████▉| 238/240 [00:09<00:00, 25.03it/s]100%|██████████| 240/240 [00:09<00:00, 25.55it/s]
+Loaded 239 embeddings
+Embeddings shape: torch.Size([768])
+  0%|          | 0/522 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1182: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(io.BytesIO(file_bytes))['last_layer_embed']
+ 26%|██▌       | 136/522 [00:00<00:00, 1356.10it/s] 52%|█████▏    | 274/522 [00:00<00:00, 1365.43it/s] 79%|███████▉  | 413/522 [00:00<00:00, 1374.28it/s]100%|██████████| 522/522 [00:00<00:00, 1376.32it/s]
+  0%|[31m          [0m| 0/89 [00:00<?, ?it/s]100%|[31m██████████[0m| 89/89 [00:00<00:00, 53312.35it/s]
+Found 240 files in zip
+  0%|          | 0/240 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1151: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(byte_stream, map_location="cpu")
+  2%|▏         | 4/240 [00:00<00:07, 31.16it/s]  3%|▎         | 8/240 [00:00<00:08, 27.89it/s]  5%|▍         | 11/240 [00:00<00:08, 27.26it/s]  6%|▌         | 14/240 [00:00<00:08, 25.98it/s]  7%|▋         | 17/240 [00:00<00:08, 25.01it/s]  8%|▊         | 20/240 [00:00<00:08, 25.32it/s] 10%|▉         | 23/240 [00:00<00:08, 25.66it/s] 11%|█         | 26/240 [00:00<00:08, 25.87it/s] 12%|█▏        | 29/240 [00:01<00:07, 26.72it/s] 13%|█▎        | 32/240 [00:01<00:08, 25.91it/s] 15%|█▍        | 35/240 [00:01<00:07, 26.90it/s] 16%|█▌        | 38/240 [00:01<00:07, 26.09it/s] 17%|█▋        | 41/240 [00:01<00:07, 25.57it/s] 18%|█▊        | 44/240 [00:01<00:07, 25.75it/s] 20%|█▉        | 47/240 [00:01<00:07, 25.19it/s] 21%|██        | 50/240 [00:01<00:07, 25.55it/s] 22%|██▏       | 53/240 [00:02<00:07, 24.92it/s] 23%|██▎       | 56/240 [00:02<00:07, 25.24it/s] 25%|██▍       | 59/240 [00:02<00:07, 25.58it/s] 26%|██▌       | 62/240 [00:02<00:07, 25.12it/s] 27%|██▋       | 65/240 [00:02<00:06, 26.10it/s] 28%|██▊       | 68/240 [00:02<00:06, 25.50it/s] 30%|██▉       | 71/240 [00:02<00:06, 25.48it/s] 31%|███       | 74/240 [00:02<00:06, 25.17it/s] 32%|███▏      | 77/240 [00:02<00:06, 24.87it/s] 33%|███▎      | 80/240 [00:03<00:06, 24.58it/s] 35%|███▍      | 83/240 [00:03<00:06, 24.38it/s] 36%|███▌      | 86/240 [00:03<00:06, 25.02it/s] 37%|███▋      | 89/240 [00:03<00:05, 25.45it/s] 38%|███▊      | 92/240 [00:03<00:05, 25.04it/s] 40%|███▉      | 95/240 [00:03<00:05, 24.71it/s] 41%|████      | 98/240 [00:03<00:05, 24.90it/s] 42%|████▏     | 101/240 [00:03<00:05, 25.29it/s] 43%|████▎     | 104/240 [00:04<00:05, 25.58it/s] 45%|████▍     | 107/240 [00:04<00:05, 25.67it/s] 46%|████▌     | 110/240 [00:04<00:05, 24.86it/s] 47%|████▋     | 113/240 [00:04<00:05, 24.59it/s] 48%|████▊     | 116/240 [00:04<00:04, 24.95it/s] 50%|████▉     | 119/240 [00:04<00:04, 24.69it/s] 51%|█████     | 122/240 [00:04<00:04, 24.38it/s] 52%|█████▏    | 125/240 [00:04<00:04, 24.79it/s] 53%|█████▎    | 128/240 [00:05<00:04, 25.53it/s] 55%|█████▍    | 131/240 [00:05<00:04, 25.37it/s] 56%|█████▌    | 134/240 [00:05<00:04, 25.57it/s] 57%|█████▋    | 137/240 [00:05<00:04, 25.47it/s] 58%|█████▊    | 140/240 [00:05<00:04, 24.98it/s] 60%|█████▉    | 143/240 [00:05<00:03, 24.71it/s] 61%|██████    | 146/240 [00:05<00:03, 24.33it/s] 62%|██████▏   | 149/240 [00:05<00:03, 25.57it/s] 63%|██████▎   | 152/240 [00:05<00:03, 26.56it/s] 65%|██████▍   | 155/240 [00:06<00:03, 25.74it/s] 66%|██████▌   | 158/240 [00:06<00:03, 25.74it/s] 67%|██████▋   | 161/240 [00:06<00:02, 26.57it/s] 68%|██████▊   | 164/240 [00:06<00:02, 26.55it/s] 70%|██████▉   | 167/240 [00:06<00:02, 25.83it/s] 71%|███████   | 170/240 [00:06<00:02, 26.05it/s] 72%|███████▏  | 173/240 [00:06<00:02, 26.10it/s] 73%|███████▎  | 176/240 [00:06<00:02, 26.76it/s] 75%|███████▍  | 179/240 [00:06<00:02, 26.56it/s] 76%|███████▌  | 182/240 [00:07<00:02, 25.81it/s] 77%|███████▋  | 185/240 [00:07<00:02, 25.85it/s] 78%|███████▊  | 188/240 [00:07<00:01, 26.02it/s] 80%|███████▉  | 191/240 [00:07<00:01, 26.74it/s] 81%|████████  | 194/240 [00:07<00:01, 26.12it/s] 82%|████████▎ | 198/240 [00:07<00:01, 27.32it/s] 84%|████████▍ | 201/240 [00:07<00:01, 26.35it/s] 85%|████████▌ | 204/240 [00:07<00:01, 25.73it/s] 86%|████████▋ | 207/240 [00:08<00:01, 25.27it/s] 88%|████████▊ | 210/240 [00:08<00:01, 24.90it/s] 89%|████████▉ | 213/240 [00:08<00:01, 24.66it/s] 90%|█████████ | 216/240 [00:08<00:00, 24.46it/s] 91%|█████████▏| 219/240 [00:08<00:00, 24.75it/s] 92%|█████████▎| 222/240 [00:08<00:00, 25.01it/s] 94%|█████████▍| 226/240 [00:08<00:00, 26.56it/s] 95%|█████████▌| 229/240 [00:08<00:00, 25.73it/s] 97%|█████████▋| 232/240 [00:09<00:00, 25.89it/s] 98%|█████████▊| 235/240 [00:09<00:00, 25.29it/s] 99%|█████████▉| 238/240 [00:09<00:00, 25.12it/s]100%|██████████| 240/240 [00:09<00:00, 25.53it/s]
+Loaded 239 embeddings
+Embeddings shape: torch.Size([768])
+  0%|          | 0/522 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1182: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(io.BytesIO(file_bytes))['last_layer_embed']
+ 26%|██▌       | 135/522 [00:00<00:00, 1349.39it/s] 52%|█████▏    | 273/522 [00:00<00:00, 1363.85it/s] 79%|███████▉  | 414/522 [00:00<00:00, 1382.37it/s]100%|██████████| 522/522 [00:00<00:00, 1377.58it/s]
+  0%|[31m          [0m| 0/89 [00:00<?, ?it/s]100%|[31m██████████[0m| 89/89 [00:00<00:00, 55261.74it/s]
+
+======================================================================
+TRAIN SUMMARY
+======================================================================
+Total samples: 179
+Label mapping (label_dict):
+{np.int64(0): 0, np.int64(1): 1, np.int64(2): 2}
+
+Label distribution:
+  Class 0: 47
+  Class 1: 22
+  Class 2: 110
+Unique labels in this split: [0, 1, 2]
+
+MRI embeddings loaded: 239
+Histo embeddings loaded: 89
+======================================================================
+
+
+======================================================================
+VAL SUMMARY
+======================================================================
+Total samples: 13
+Label mapping (label_dict):
+{np.int64(0): 0, np.int64(1): 1, np.int64(2): 2}
+
+Label distribution:
+  Class 0: 3
+  Class 1: 2
+  Class 2: 8
+Unique labels in this split: [0, 1, 2]
+
+MRI embeddings loaded: 239
+Histo embeddings loaded: 89
+======================================================================
+
+
+======================================================================
+TEST SUMMARY
+======================================================================
+Total samples: 11
+Label mapping (label_dict):
+{np.int64(0): 0, np.int64(1): 1, np.int64(2): 2}
+
+Label distribution:
+  Class 0: 3
+  Class 1: 1
+  Class 2: 7
+Unique labels in this split: [0, 1, 2]
+
+MRI embeddings loaded: 239
+Histo embeddings loaded: 89
+======================================================================
+
+First 5 raw labels:
+0 <class 'int'> 2
+1 <class 'int'> 2
+2 <class 'int'> 1
+3 <class 'int'> 2
+4 <class 'int'> 2
+Zero MRI: 30 / 179
+Zero Histo: 112 / 179
+Both zero: 0 / 179
+/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:69: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  mri_state = torch.load(mri_probe_path, map_location=device)
+/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:78: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  histo_state = torch.load(histo_probe_path, map_location=device)
+Zero MRI: 1 / 11
+Zero Histo: 0 / 11
+Both zero: 0 / 11
+Set optimizer: adam
+Start training
+Iter [10/1200] Loss: 0.8090 LR: 0.001000
+Iter [20/1200] Loss: 0.8520 LR: 0.000999
+Iter [30/1200] Loss: 0.5474 LR: 0.000998
+Iter [40/1200] Loss: 0.7593 LR: 0.000997
+Iter [50/1200] Loss: 0.7946 LR: 0.000996
+Iter [60/1200] Loss: 0.5595 LR: 0.000994
+Iter [70/1200] Loss: 0.7531 LR: 0.000992
+Iter [80/1200] Loss: 0.7770 LR: 0.000989
+Iter [90/1200] Loss: 0.5624 LR: 0.000986
+Iter [100/1200] Loss: 0.7584 LR: 0.000983
+Iter [110/1200] Loss: 0.7472 LR: 0.000979
+Iter [120/1200] Loss: 0.5593 LR: 0.000976
+Iter [130/1200] Loss: 0.7524 LR: 0.000971
+Iter [140/1200] Loss: 0.7644 LR: 0.000967
+Iter [150/1200] Loss: 0.5683 LR: 0.000962
+Iter [160/1200] Loss: 0.7865 LR: 0.000957
+Iter [170/1200] Loss: 0.7520 LR: 0.000951
+Iter [180/1200] Loss: 0.5662 LR: 0.000946
+Iter [190/1200] Loss: 0.7749 LR: 0.000939
+Iter [200/1200] Loss: 0.7374 LR: 0.000933
+Evaluating on validation set...
+Val [200/1200] Acc: 0.5385 F1: 0.5795 Prec: 0.5952 Rec: 0.5556 AUROC: 0.7240 AUPRC: 0.6471
+Best F1 improved: 0.0000 → 0.5795
+Iter [210/1200] Loss: 0.5489 LR: 0.000926
+Iter [220/1200] Loss: 0.7504 LR: 0.000919
+Iter [230/1200] Loss: 0.7262 LR: 0.000912
+Iter [240/1200] Loss: 0.5448 LR: 0.000905
+Iter [250/1200] Loss: 0.7459 LR: 0.000897
+Iter [260/1200] Loss: 0.7191 LR: 0.000889
+Iter [270/1200] Loss: 0.5388 LR: 0.000880
+Iter [280/1200] Loss: 0.7406 LR: 0.000872
+Iter [290/1200] Loss: 0.7121 LR: 0.000863
+Iter [300/1200] Loss: 0.5311 LR: 0.000854
+Iter [310/1200] Loss: 0.7350 LR: 0.000844
+Iter [320/1200] Loss: 0.7052 LR: 0.000835
+Iter [330/1200] Loss: 0.5223 LR: 0.000825
+Iter [340/1200] Loss: 0.7294 LR: 0.000815
+Iter [350/1200] Loss: 0.6983 LR: 0.000804
+Iter [360/1200] Loss: 0.5129 LR: 0.000794
+Iter [370/1200] Loss: 0.7241 LR: 0.000783
+Iter [380/1200] Loss: 0.6914 LR: 0.000772
+Iter [390/1200] Loss: 0.5034 LR: 0.000761
+Iter [400/1200] Loss: 0.7191 LR: 0.000750
+Evaluating on validation set...
+Val [400/1200] Acc: 0.5385 F1: 0.5795 Prec: 0.5952 Rec: 0.5556 AUROC: 0.7076 AUPRC: 0.6309
+Iter [410/1200] Loss: 0.6847 LR: 0.000739
+Iter [420/1200] Loss: 0.4940 LR: 0.000727
+Iter [430/1200] Loss: 0.7147 LR: 0.000715
+Iter [440/1200] Loss: 0.6781 LR: 0.000703
+Iter [450/1200] Loss: 0.4848 LR: 0.000691
+Iter [460/1200] Loss: 0.7108 LR: 0.000679
+Iter [470/1200] Loss: 0.6719 LR: 0.000667
+Iter [480/1200] Loss: 0.4760 LR: 0.000655
+Iter [490/1200] Loss: 0.7074 LR: 0.000642
+Iter [500/1200] Loss: 0.6660 LR: 0.000629
+Iter [510/1200] Loss: 0.4678 LR: 0.000617
+Iter [520/1200] Loss: 0.7046 LR: 0.000604
+Iter [530/1200] Loss: 0.6607 LR: 0.000591
+Iter [540/1200] Loss: 0.4602 LR: 0.000578
+Iter [550/1200] Loss: 0.7023 LR: 0.000565
+Iter [560/1200] Loss: 0.6559 LR: 0.000552
+Iter [570/1200] Loss: 0.4532 LR: 0.000539
+Iter [580/1200] Loss: 0.7003 LR: 0.000526
+Iter [590/1200] Loss: 0.6516 LR: 0.000513
+Iter [600/1200] Loss: 0.4469 LR: 0.000500
+Evaluating on validation set...
+Val [600/1200] Acc: 0.5385 F1: 0.5795 Prec: 0.5952 Rec: 0.5556 AUROC: 0.7187 AUPRC: 0.6330
+Iter [610/1200] Loss: 0.6988 LR: 0.000487
+Iter [620/1200] Loss: 0.6479 LR: 0.000474
+Iter [630/1200] Loss: 0.4412 LR: 0.000461
+Iter [640/1200] Loss: 0.6975 LR: 0.000448
+Iter [650/1200] Loss: 0.6446 LR: 0.000435
+Iter [660/1200] Loss: 0.4362 LR: 0.000422
+Iter [670/1200] Loss: 0.6964 LR: 0.000409
+Iter [680/1200] Loss: 0.6417 LR: 0.000396
+Iter [690/1200] Loss: 0.4317 LR: 0.000383
+Iter [700/1200] Loss: 0.6956 LR: 0.000371
+Iter [710/1200] Loss: 0.6393 LR: 0.000358
+Iter [720/1200] Loss: 0.4279 LR: 0.000345
+Iter [730/1200] Loss: 0.6949 LR: 0.000333
+Iter [740/1200] Loss: 0.6372 LR: 0.000321
+Iter [750/1200] Loss: 0.4245 LR: 0.000309
+Iter [760/1200] Loss: 0.6943 LR: 0.000297
+Iter [770/1200] Loss: 0.6354 LR: 0.000285
+Iter [780/1200] Loss: 0.4216 LR: 0.000273
+Iter [790/1200] Loss: 0.6939 LR: 0.000261
+Iter [800/1200] Loss: 0.6339 LR: 0.000250
+Evaluating on validation set...
+Val [800/1200] Acc: 0.5385 F1: 0.5795 Prec: 0.5952 Rec: 0.5556 AUROC: 0.7187 AUPRC: 0.6330
+Iter [810/1200] Loss: 0.4191 LR: 0.000239
+Iter [820/1200] Loss: 0.6935 LR: 0.000228
+Iter [830/1200] Loss: 0.6326 LR: 0.000217
+Iter [840/1200] Loss: 0.4170 LR: 0.000206
+Iter [850/1200] Loss: 0.6932 LR: 0.000196
+Iter [860/1200] Loss: 0.6316 LR: 0.000185
+Iter [870/1200] Loss: 0.4153 LR: 0.000175
+Iter [880/1200] Loss: 0.6930 LR: 0.000165
+Iter [890/1200] Loss: 0.6307 LR: 0.000156
+Iter [900/1200] Loss: 0.4138 LR: 0.000146
+Iter [910/1200] Loss: 0.6928 LR: 0.000137
+Iter [920/1200] Loss: 0.6300 LR: 0.000128
+Iter [930/1200] Loss: 0.4126 LR: 0.000120
+Iter [940/1200] Loss: 0.6926 LR: 0.000111
+Iter [950/1200] Loss: 0.6294 LR: 0.000103
+Iter [960/1200] Loss: 0.4117 LR: 0.000095
+Iter [970/1200] Loss: 0.6925 LR: 0.000088
+Iter [980/1200] Loss: 0.6290 LR: 0.000081
+Iter [990/1200] Loss: 0.4110 LR: 0.000074
+Iter [1000/1200] Loss: 0.6924 LR: 0.000067
+Evaluating on validation set...
+Val [1000/1200] Acc: 0.5385 F1: 0.5795 Prec: 0.5952 Rec: 0.5556 AUROC: 0.7187 AUPRC: 0.6330
+Iter [1010/1200] Loss: 0.6287 LR: 0.000061
+Iter [1020/1200] Loss: 0.4104 LR: 0.000054
+Iter [1030/1200] Loss: 0.6924 LR: 0.000049
+Iter [1040/1200] Loss: 0.6284 LR: 0.000043
+Iter [1050/1200] Loss: 0.4100 LR: 0.000038
+Iter [1060/1200] Loss: 0.6923 LR: 0.000033
+Iter [1070/1200] Loss: 0.6283 LR: 0.000029
+Iter [1080/1200] Loss: 0.4098 LR: 0.000024
+Iter [1090/1200] Loss: 0.6923 LR: 0.000021
+Iter [1100/1200] Loss: 0.6282 LR: 0.000017
+Iter [1110/1200] Loss: 0.4096 LR: 0.000014
+Iter [1120/1200] Loss: 0.6923 LR: 0.000011
+Iter [1130/1200] Loss: 0.6281 LR: 0.000008
+Iter [1140/1200] Loss: 0.4095 LR: 0.000006
+Iter [1150/1200] Loss: 0.6923 LR: 0.000004
+Iter [1160/1200] Loss: 0.6281 LR: 0.000003
+Iter [1170/1200] Loss: 0.4095 LR: 0.000002
+Iter [1180/1200] Loss: 0.6923 LR: 0.000001
+Iter [1190/1200] Loss: 0.6281 LR: 0.000000
+Iter [1200/1200] Loss: 0.4095 LR: 0.000000
+Evaluating on validation set...
+/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:313: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  torch.load(os.path.join(output_dir, 'best_model.pth'))
+Val [1200/1200] Acc: 0.5385 F1: 0.5795 Prec: 0.5952 Rec: 0.5556 AUROC: 0.7187 AUPRC: 0.6330
+Alpha: 0.9649
+Beta: 1.0092
+Evaluating on test set...
+Test Accuracy: 0.6364 F1: 0.6364 Precision: 0.3333 Recall: 0.3333 AUROC: 0.6944 AUPRC: 0.5333
+Training complete.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Running variant: fusion_mri_histo
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Command:
+ python3 /gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py --batch_size 32 --train_iters 1200 --lr 0.001 --min_lr 0.0 --optim adam --momentum 0.0 --weight_decay 0.0001 --eval_interval 200 --num_workers 4 --seed 42 --dataset_csv /gscratch/kurtlab/CoreBT/dataset_utils/fusion/corebt_fusion_dataset_WHOGrade_case_sharedtest.csv --zip_path_mri /gscratch/scrubbed/juampablo/corebt/mri_embeddings.zip --zip_path_histo /gscratch/scrubbed/juampablo/corebt/corebt_clam_preprocessing/slide_embeddings.zip --output_dir /gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/WHOGrade/fusion_mri_histo/ --mri_probe_path /gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/WHOGrade/mri_only/best_model.pth --histo_probe_path /gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/WHOGrade/histo_only/best_model.pth
+
+Collecting results...
+Collected fusion_mri_histo
+
+Saved combined summary to:
+/gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/WHOGrade/summary.json
+
+All requested runs completed successfully.
+Namespace(dataset_csv='/gscratch/kurtlab/CoreBT/dataset_utils/fusion/corebt_fusion_dataset_LGG_HGG_case_sharedtest.csv', zip_path_mri='/gscratch/scrubbed/juampablo/corebt/mri_embeddings.zip', zip_path_histo='/gscratch/scrubbed/juampablo/corebt/corebt_clam_preprocessing/slide_embeddings.zip', histo_embed_dim=768, mri_embed_dim=768, batch_size=32, train_iters=1200, lr=0.001, min_lr=0.0, optim='adam', momentum=0.0, weight_decay=0.0001, eval_interval=200, model_select='best', num_workers=4, seed=42, z_score=False, output_dir='/gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/LGG_HGG/fusion_mri_histo/', mri_probe_path='/gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/LGG_HGG/mri_only/best_model.pth', histo_probe_path='/gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/LGG_HGG/histo_only/best_model.pth')
+Found 240 files in zip
+  0%|          | 0/240 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1151: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(byte_stream, map_location="cpu")
+  1%|▏         | 3/240 [00:00<00:08, 26.55it/s]  2%|▎         | 6/240 [00:00<00:09, 25.33it/s]  4%|▍         | 9/240 [00:00<00:09, 25.36it/s]  5%|▌         | 12/240 [00:00<00:08, 25.45it/s]  6%|▋         | 15/240 [00:00<00:09, 24.72it/s]  8%|▊         | 18/240 [00:00<00:08, 25.03it/s]  9%|▉         | 21/240 [00:00<00:08, 24.72it/s] 10%|█         | 24/240 [00:00<00:08, 25.20it/s] 11%|█▏        | 27/240 [00:01<00:08, 26.23it/s] 12%|█▎        | 30/240 [00:01<00:07, 26.26it/s] 14%|█▍        | 33/240 [00:01<00:07, 26.42it/s] 15%|█▌        | 36/240 [00:01<00:07, 26.71it/s] 16%|█▋        | 39/240 [00:01<00:07, 26.08it/s] 18%|█▊        | 42/240 [00:01<00:07, 25.56it/s] 19%|█▉        | 45/240 [00:01<00:07, 25.53it/s] 20%|██        | 48/240 [00:01<00:07, 25.34it/s] 21%|██▏       | 51/240 [00:01<00:07, 25.46it/s] 22%|██▎       | 54/240 [00:02<00:07, 25.19it/s] 24%|██▍       | 57/240 [00:02<00:07, 25.21it/s] 25%|██▌       | 60/240 [00:02<00:07, 25.51it/s] 26%|██▋       | 63/240 [00:02<00:07, 24.98it/s] 28%|██▊       | 66/240 [00:02<00:06, 26.05it/s] 29%|██▉       | 69/240 [00:02<00:06, 25.45it/s] 30%|███       | 72/240 [00:02<00:06, 25.40it/s] 31%|███▏      | 75/240 [00:02<00:06, 25.13it/s] 32%|███▎      | 78/240 [00:03<00:06, 24.85it/s] 34%|███▍      | 81/240 [00:03<00:06, 24.49it/s] 35%|███▌      | 84/240 [00:03<00:06, 24.44it/s] 36%|███▋      | 87/240 [00:03<00:06, 24.96it/s] 38%|███▊      | 90/240 [00:03<00:05, 25.29it/s] 39%|███▉      | 93/240 [00:03<00:05, 24.92it/s] 40%|████      | 96/240 [00:03<00:05, 25.00it/s] 41%|████▏     | 99/240 [00:03<00:05, 24.54it/s] 42%|████▎     | 102/240 [00:04<00:05, 24.95it/s] 44%|████▍     | 105/240 [00:04<00:05, 26.01it/s] 45%|████▌     | 108/240 [00:04<00:05, 25.25it/s] 46%|████▋     | 111/240 [00:04<00:05, 24.74it/s] 48%|████▊     | 114/240 [00:04<00:05, 24.61it/s] 49%|████▉     | 117/240 [00:04<00:04, 25.22it/s] 50%|█████     | 120/240 [00:04<00:04, 24.65it/s] 51%|█████▏    | 123/240 [00:04<00:04, 24.50it/s] 52%|█████▎    | 126/240 [00:04<00:04, 25.74it/s] 54%|█████▍    | 129/240 [00:05<00:04, 25.68it/s] 55%|█████▌    | 132/240 [00:05<00:04, 25.91it/s] 56%|█████▋    | 135/240 [00:05<00:04, 25.81it/s] 57%|█████▊    | 138/240 [00:05<00:03, 25.81it/s] 59%|█████▉    | 141/240 [00:05<00:03, 25.44it/s] 60%|██████    | 144/240 [00:05<00:03, 25.08it/s] 61%|██████▏   | 147/240 [00:05<00:03, 25.34it/s] 62%|██████▎   | 150/240 [00:05<00:03, 26.26it/s] 64%|██████▍   | 153/240 [00:06<00:03, 26.31it/s] 65%|██████▌   | 156/240 [00:06<00:03, 26.25it/s] 66%|██████▋   | 159/240 [00:06<00:03, 26.22it/s] 68%|██████▊   | 162/240 [00:06<00:02, 26.42it/s] 69%|██████▉   | 165/240 [00:06<00:02, 26.57it/s] 70%|███████   | 168/240 [00:06<00:02, 26.47it/s] 71%|███████▏  | 171/240 [00:06<00:02, 25.82it/s] 72%|███████▎  | 174/240 [00:06<00:02, 26.64it/s] 74%|███████▍  | 177/240 [00:06<00:02, 27.34it/s] 75%|███████▌  | 180/240 [00:07<00:02, 26.33it/s] 76%|███████▋  | 183/240 [00:07<00:02, 25.58it/s] 78%|███████▊  | 186/240 [00:07<00:02, 25.63it/s] 79%|███████▉  | 189/240 [00:07<00:01, 26.64it/s] 80%|████████  | 192/240 [00:07<00:01, 26.35it/s] 81%|████████▏ | 195/240 [00:07<00:01, 26.44it/s] 82%|████████▎ | 198/240 [00:07<00:01, 26.86it/s] 84%|████████▍ | 201/240 [00:07<00:01, 25.95it/s] 85%|████████▌ | 204/240 [00:07<00:01, 25.44it/s] 86%|████████▋ | 207/240 [00:08<00:01, 25.09it/s] 88%|████████▊ | 210/240 [00:08<00:01, 24.88it/s] 89%|████████▉ | 213/240 [00:08<00:01, 24.72it/s] 90%|█████████ | 216/240 [00:08<00:00, 24.55it/s] 91%|█████████▏| 219/240 [00:08<00:00, 24.75it/s] 92%|█████████▎| 222/240 [00:08<00:00, 25.12it/s] 94%|█████████▍| 226/240 [00:08<00:00, 26.73it/s] 95%|█████████▌| 229/240 [00:08<00:00, 25.95it/s] 97%|█████████▋| 232/240 [00:09<00:00, 26.09it/s] 98%|█████████▊| 235/240 [00:09<00:00, 25.49it/s] 99%|█████████▉| 238/240 [00:09<00:00, 25.31it/s]100%|██████████| 240/240 [00:09<00:00, 25.53it/s]
+Loaded 239 embeddings
+Embeddings shape: torch.Size([768])
+  0%|          | 0/522 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1182: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(io.BytesIO(file_bytes))['last_layer_embed']
+ 26%|██▌       | 134/522 [00:00<00:00, 1332.50it/s] 52%|█████▏    | 271/522 [00:00<00:00, 1349.41it/s] 79%|███████▊  | 410/522 [00:00<00:00, 1363.94it/s]100%|██████████| 522/522 [00:00<00:00, 1362.52it/s]
+  0%|[31m          [0m| 0/89 [00:00<?, ?it/s]100%|[31m██████████[0m| 89/89 [00:00<00:00, 48873.14it/s]
+Found 240 files in zip
+  0%|          | 0/240 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1151: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(byte_stream, map_location="cpu")
+  2%|▏         | 4/240 [00:00<00:07, 31.80it/s]  3%|▎         | 8/240 [00:00<00:08, 28.22it/s]  5%|▍         | 11/240 [00:00<00:08, 27.58it/s]  6%|▌         | 14/240 [00:00<00:08, 26.25it/s]  7%|▋         | 17/240 [00:00<00:08, 25.44it/s]  8%|▊         | 20/240 [00:00<00:08, 25.82it/s] 10%|▉         | 23/240 [00:00<00:08, 26.08it/s] 11%|█         | 26/240 [00:00<00:08, 26.27it/s] 12%|█▏        | 29/240 [00:01<00:07, 27.06it/s] 13%|█▎        | 32/240 [00:01<00:07, 26.11it/s] 15%|█▍        | 35/240 [00:01<00:07, 27.14it/s] 16%|█▌        | 38/240 [00:01<00:07, 26.30it/s] 17%|█▋        | 41/240 [00:01<00:07, 25.79it/s] 18%|█▊        | 44/240 [00:01<00:07, 25.94it/s] 20%|█▉        | 47/240 [00:01<00:07, 25.43it/s] 21%|██        | 50/240 [00:01<00:07, 25.80it/s] 22%|██▏       | 53/240 [00:02<00:07, 25.24it/s] 23%|██▎       | 56/240 [00:02<00:07, 25.52it/s] 25%|██▍       | 59/240 [00:02<00:07, 25.81it/s] 26%|██▌       | 62/240 [00:02<00:07, 25.34it/s] 27%|██▋       | 65/240 [00:02<00:06, 26.36it/s] 28%|██▊       | 68/240 [00:02<00:06, 25.77it/s] 30%|██▉       | 71/240 [00:02<00:06, 25.84it/s] 31%|███       | 74/240 [00:02<00:06, 25.41it/s] 32%|███▏      | 77/240 [00:02<00:06, 25.00it/s] 33%|███▎      | 80/240 [00:03<00:06, 24.76it/s] 35%|███▍      | 83/240 [00:03<00:06, 24.72it/s] 36%|███▌      | 86/240 [00:03<00:06, 25.32it/s] 37%|███▋      | 89/240 [00:03<00:05, 25.71it/s] 38%|███▊      | 92/240 [00:03<00:05, 25.32it/s] 40%|███▉      | 95/240 [00:03<00:05, 24.99it/s] 41%|████      | 98/240 [00:03<00:05, 25.28it/s] 42%|████▏     | 101/240 [00:03<00:05, 25.67it/s] 43%|████▎     | 104/240 [00:04<00:05, 25.80it/s] 45%|████▍     | 107/240 [00:04<00:05, 25.86it/s] 46%|████▌     | 110/240 [00:04<00:05, 24.97it/s] 47%|████▋     | 113/240 [00:04<00:05, 24.72it/s] 48%|████▊     | 116/240 [00:04<00:04, 25.02it/s] 50%|████▉     | 119/240 [00:04<00:04, 24.62it/s] 51%|█████     | 122/240 [00:04<00:04, 24.21it/s] 52%|█████▏    | 125/240 [00:04<00:04, 24.81it/s] 53%|█████▎    | 128/240 [00:04<00:04, 25.80it/s] 55%|█████▍    | 131/240 [00:05<00:04, 25.92it/s] 56%|█████▌    | 134/240 [00:05<00:04, 26.20it/s] 57%|█████▋    | 137/240 [00:05<00:03, 26.16it/s] 58%|█████▊    | 140/240 [00:05<00:03, 25.62it/s] 60%|█████▉    | 143/240 [00:05<00:03, 25.24it/s] 61%|██████    | 146/240 [00:05<00:03, 24.82it/s] 62%|██████▏   | 149/240 [00:05<00:03, 26.00it/s] 63%|██████▎   | 152/240 [00:05<00:03, 26.94it/s] 65%|██████▍   | 155/240 [00:06<00:03, 25.97it/s] 66%|██████▌   | 158/240 [00:06<00:03, 26.02it/s] 67%|██████▋   | 161/240 [00:06<00:02, 26.73it/s] 68%|██████▊   | 164/240 [00:06<00:02, 26.78it/s] 70%|██████▉   | 167/240 [00:06<00:02, 26.07it/s] 71%|███████   | 170/240 [00:06<00:02, 26.33it/s] 72%|███████▏  | 173/240 [00:06<00:02, 26.45it/s] 73%|███████▎  | 176/240 [00:06<00:02, 27.11it/s] 75%|███████▍  | 179/240 [00:06<00:02, 26.88it/s] 76%|███████▌  | 182/240 [00:07<00:02, 26.06it/s] 77%|███████▋  | 185/240 [00:07<00:02, 26.13it/s] 78%|███████▊  | 188/240 [00:07<00:01, 26.29it/s] 80%|███████▉  | 191/240 [00:07<00:01, 27.00it/s] 81%|████████  | 194/240 [00:07<00:01, 26.35it/s] 82%|████████▎ | 198/240 [00:07<00:01, 27.56it/s] 84%|████████▍ | 201/240 [00:07<00:01, 26.56it/s] 85%|████████▌ | 204/240 [00:07<00:01, 25.91it/s] 86%|████████▋ | 207/240 [00:07<00:01, 25.39it/s] 88%|████████▊ | 210/240 [00:08<00:01, 25.07it/s] 89%|████████▉ | 213/240 [00:08<00:01, 24.85it/s] 90%|█████████ | 216/240 [00:08<00:00, 24.72it/s] 91%|█████████▏| 219/240 [00:08<00:00, 24.89it/s] 92%|█████████▎| 222/240 [00:08<00:00, 25.18it/s] 94%|█████████▍| 226/240 [00:08<00:00, 26.89it/s] 95%|█████████▌| 229/240 [00:08<00:00, 26.00it/s] 97%|█████████▋| 232/240 [00:08<00:00, 26.15it/s] 98%|█████████▊| 235/240 [00:09<00:00, 25.63it/s] 99%|█████████▉| 238/240 [00:09<00:00, 25.37it/s]100%|██████████| 240/240 [00:09<00:00, 25.81it/s]
+Loaded 239 embeddings
+Embeddings shape: torch.Size([768])
+  0%|          | 0/522 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1182: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(io.BytesIO(file_bytes))['last_layer_embed']
+ 26%|██▌       | 135/522 [00:00<00:00, 1342.67it/s] 52%|█████▏    | 273/522 [00:00<00:00, 1358.57it/s] 79%|███████▉  | 414/522 [00:00<00:00, 1378.05it/s]100%|██████████| 522/522 [00:00<00:00, 1372.73it/s]
+  0%|[31m          [0m| 0/89 [00:00<?, ?it/s]100%|[31m██████████[0m| 89/89 [00:00<00:00, 53457.40it/s]
+Found 240 files in zip
+  0%|          | 0/240 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1151: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(byte_stream, map_location="cpu")
+  2%|▏         | 4/240 [00:00<00:07, 31.66it/s]  3%|▎         | 8/240 [00:00<00:08, 28.28it/s]  5%|▍         | 11/240 [00:00<00:08, 27.67it/s]  6%|▌         | 14/240 [00:00<00:08, 26.35it/s]  7%|▋         | 17/240 [00:00<00:08, 25.47it/s]  8%|▊         | 20/240 [00:00<00:08, 25.79it/s] 10%|▉         | 23/240 [00:00<00:08, 26.02it/s] 11%|█         | 26/240 [00:00<00:08, 26.25it/s] 12%|█▏        | 29/240 [00:01<00:07, 27.05it/s] 13%|█▎        | 32/240 [00:01<00:07, 26.21it/s] 15%|█▍        | 35/240 [00:01<00:07, 27.05it/s] 16%|█▌        | 38/240 [00:01<00:07, 26.10it/s] 17%|█▋        | 41/240 [00:01<00:07, 25.37it/s] 18%|█▊        | 44/240 [00:01<00:07, 25.51it/s] 20%|█▉        | 47/240 [00:01<00:07, 25.01it/s] 21%|██        | 50/240 [00:01<00:07, 25.43it/s] 22%|██▏       | 53/240 [00:02<00:07, 25.00it/s] 23%|██▎       | 56/240 [00:02<00:07, 25.36it/s] 25%|██▍       | 59/240 [00:02<00:07, 25.67it/s] 26%|██▌       | 62/240 [00:02<00:07, 25.33it/s] 27%|██▋       | 65/240 [00:02<00:06, 26.38it/s] 28%|██▊       | 68/240 [00:02<00:06, 25.83it/s] 30%|██▉       | 71/240 [00:02<00:06, 25.80it/s] 31%|███       | 74/240 [00:02<00:06, 25.43it/s] 32%|███▏      | 77/240 [00:02<00:06, 25.16it/s] 33%|███▎      | 80/240 [00:03<00:06, 24.91it/s] 35%|███▍      | 83/240 [00:03<00:06, 24.78it/s] 36%|███▌      | 86/240 [00:03<00:06, 25.36it/s] 37%|███▋      | 89/240 [00:03<00:05, 25.79it/s] 38%|███▊      | 92/240 [00:03<00:05, 25.47it/s] 40%|███▉      | 95/240 [00:03<00:05, 25.10it/s] 41%|████      | 98/240 [00:03<00:05, 25.40it/s] 42%|████▏     | 101/240 [00:03<00:05, 25.66it/s] 43%|████▎     | 104/240 [00:04<00:05, 25.87it/s] 45%|████▍     | 107/240 [00:04<00:05, 25.95it/s] 46%|████▌     | 110/240 [00:04<00:05, 25.32it/s] 47%|████▋     | 113/240 [00:04<00:05, 25.07it/s] 48%|████▊     | 116/240 [00:04<00:04, 25.45it/s] 50%|████▉     | 119/240 [00:04<00:04, 25.11it/s] 51%|█████     | 122/240 [00:04<00:04, 24.76it/s] 52%|█████▏    | 125/240 [00:04<00:04, 25.23it/s] 53%|█████▎    | 128/240 [00:04<00:04, 26.15it/s] 55%|█████▍    | 131/240 [00:05<00:04, 26.16it/s] 56%|█████▌    | 134/240 [00:05<00:04, 26.38it/s] 57%|█████▋    | 137/240 [00:05<00:03, 26.30it/s] 58%|█████▊    | 140/240 [00:05<00:03, 25.80it/s] 60%|█████▉    | 143/240 [00:05<00:03, 25.45it/s] 61%|██████    | 146/240 [00:05<00:03, 24.98it/s] 62%|██████▏   | 149/240 [00:05<00:03, 26.07it/s] 63%|██████▎   | 152/240 [00:05<00:03, 27.07it/s] 65%|██████▍   | 155/240 [00:06<00:03, 26.12it/s] 66%|██████▌   | 158/240 [00:06<00:03, 26.17it/s] 67%|██████▋   | 161/240 [00:06<00:02, 26.93it/s] 68%|██████▊   | 164/240 [00:06<00:02, 26.90it/s] 70%|██████▉   | 167/240 [00:06<00:02, 26.16it/s] 71%|███████   | 170/240 [00:06<00:02, 26.42it/s] 72%|███████▏  | 173/240 [00:06<00:02, 26.53it/s] 73%|███████▎  | 176/240 [00:06<00:02, 27.24it/s] 75%|███████▍  | 179/240 [00:06<00:02, 26.94it/s] 76%|███████▌  | 182/240 [00:07<00:02, 26.19it/s] 77%|███████▋  | 185/240 [00:07<00:02, 26.21it/s] 78%|███████▊  | 188/240 [00:07<00:01, 26.39it/s] 80%|███████▉  | 191/240 [00:07<00:01, 26.99it/s] 81%|████████  | 194/240 [00:07<00:01, 26.35it/s] 82%|████████▎ | 198/240 [00:07<00:01, 27.55it/s] 84%|████████▍ | 201/240 [00:07<00:01, 26.44it/s] 85%|████████▌ | 204/240 [00:07<00:01, 25.84it/s] 86%|████████▋ | 207/240 [00:07<00:01, 24.30it/s] 88%|████████▊ | 210/240 [00:08<00:01, 24.10it/s] 89%|████████▉ | 213/240 [00:08<00:01, 23.27it/s] 90%|█████████ | 216/240 [00:08<00:01, 23.19it/s] 91%|█████████▏| 219/240 [00:08<00:00, 23.76it/s] 92%|█████████▎| 222/240 [00:08<00:00, 24.30it/s] 94%|█████████▍| 226/240 [00:08<00:00, 26.05it/s] 95%|█████████▌| 229/240 [00:08<00:00, 25.49it/s] 97%|█████████▋| 232/240 [00:09<00:00, 25.81it/s] 98%|█████████▊| 235/240 [00:09<00:00, 25.35it/s] 99%|█████████▉| 238/240 [00:09<00:00, 25.31it/s]100%|██████████| 240/240 [00:09<00:00, 25.73it/s]
+Loaded 239 embeddings
+Embeddings shape: torch.Size([768])
+  0%|          | 0/522 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1182: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(io.BytesIO(file_bytes))['last_layer_embed']
+ 26%|██▌       | 135/522 [00:00<00:00, 1346.70it/s] 52%|█████▏    | 271/522 [00:00<00:00, 1353.40it/s] 79%|███████▊  | 410/522 [00:00<00:00, 1369.34it/s]100%|██████████| 522/522 [00:00<00:00, 1368.74it/s]
+  0%|[31m          [0m| 0/89 [00:00<?, ?it/s]100%|[31m██████████[0m| 89/89 [00:00<00:00, 51332.93it/s]
+
+======================================================================
+TRAIN SUMMARY
+======================================================================
+Total samples: 179
+Label mapping (label_dict):
+{np.int64(0): 0, np.int64(1): 1}
+
+Label distribution:
+  Class 0: 47
+  Class 1: 132
+Unique labels in this split: [0, 1]
+
+MRI embeddings loaded: 239
+Histo embeddings loaded: 89
+======================================================================
+
+
+======================================================================
+VAL SUMMARY
+======================================================================
+Total samples: 13
+Label mapping (label_dict):
+{np.int64(0): 0, np.int64(1): 1}
+
+Label distribution:
+  Class 0: 3
+  Class 1: 10
+Unique labels in this split: [0, 1]
+
+MRI embeddings loaded: 239
+Histo embeddings loaded: 89
+======================================================================
+
+
+======================================================================
+TEST SUMMARY
+======================================================================
+Total samples: 11
+Label mapping (label_dict):
+{np.int64(0): 0, np.int64(1): 1}
+
+Label distribution:
+  Class 0: 3
+  Class 1: 8
+Unique labels in this split: [0, 1]
+
+MRI embeddings loaded: 239
+Histo embeddings loaded: 89
+======================================================================
+
+First 5 raw labels:
+0 <class 'int'> 1
+1 <class 'int'> 1
+2 <class 'int'> 1
+3 <class 'int'> 1
+4 <class 'int'> 1
+Zero MRI: 33 / 179
+Zero Histo: 108 / 179
+Both zero: 0 / 179
+/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:69: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  mri_state = torch.load(mri_probe_path, map_location=device)
+/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:78: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  histo_state = torch.load(histo_probe_path, map_location=device)
+Zero MRI: 1 / 11
+Zero Histo: 0 / 11
+Both zero: 0 / 11
+Set optimizer: adam
+Start training
+Iter [10/1200] Loss: 0.6701 LR: 0.001000
+Iter [20/1200] Loss: 0.5998 LR: 0.000999
+Iter [30/1200] Loss: 0.4816 LR: 0.000998
+Iter [40/1200] Loss: 0.6548 LR: 0.000997
+Iter [50/1200] Loss: 0.5385 LR: 0.000996
+Iter [60/1200] Loss: 0.4820 LR: 0.000994
+Iter [70/1200] Loss: 0.6675 LR: 0.000992
+Iter [80/1200] Loss: 0.5382 LR: 0.000989
+Iter [90/1200] Loss: 0.4651 LR: 0.000986
+Iter [100/1200] Loss: 0.6700 LR: 0.000983
+Iter [110/1200] Loss: 0.5069 LR: 0.000979
+Iter [120/1200] Loss: 0.4438 LR: 0.000976
+Iter [130/1200] Loss: 0.6549 LR: 0.000971
+Iter [140/1200] Loss: 0.5257 LR: 0.000967
+Iter [150/1200] Loss: 0.4481 LR: 0.000962
+Iter [160/1200] Loss: 0.6564 LR: 0.000957
+Iter [170/1200] Loss: 0.5101 LR: 0.000951
+Iter [180/1200] Loss: 0.4622 LR: 0.000946
+Iter [190/1200] Loss: 0.6358 LR: 0.000939
+Iter [200/1200] Loss: 0.5087 LR: 0.000933
+Evaluating on validation set...
+Val [200/1200] Acc: 0.3077 F1: 0.3077 Prec: 0.4333 Rec: 0.4333 AUROC: 0.5667 AUPRC: 0.5894
+Best F1 improved: 0.0000 → 0.3077
+Iter [210/1200] Loss: 0.4411 LR: 0.000926
+Iter [220/1200] Loss: 0.6288 LR: 0.000919
+Iter [230/1200] Loss: 0.5048 LR: 0.000912
+Iter [240/1200] Loss: 0.4375 LR: 0.000905
+Iter [250/1200] Loss: 0.6201 LR: 0.000897
+Iter [260/1200] Loss: 0.5035 LR: 0.000889
+Iter [270/1200] Loss: 0.4337 LR: 0.000880
+Iter [280/1200] Loss: 0.6115 LR: 0.000872
+Iter [290/1200] Loss: 0.5029 LR: 0.000863
+Iter [300/1200] Loss: 0.4301 LR: 0.000854
+Iter [310/1200] Loss: 0.6032 LR: 0.000844
+Iter [320/1200] Loss: 0.5027 LR: 0.000835
+Iter [330/1200] Loss: 0.4267 LR: 0.000825
+Iter [340/1200] Loss: 0.5955 LR: 0.000815
+Iter [350/1200] Loss: 0.5028 LR: 0.000804
+Iter [360/1200] Loss: 0.4236 LR: 0.000794
+Iter [370/1200] Loss: 0.5885 LR: 0.000783
+Iter [380/1200] Loss: 0.5031 LR: 0.000772
+Iter [390/1200] Loss: 0.4209 LR: 0.000761
+Iter [400/1200] Loss: 0.5821 LR: 0.000750
+Evaluating on validation set...
+Val [400/1200] Acc: 0.6154 F1: 0.6456 Prec: 0.5952 Rec: 0.6333 AUROC: 0.5667 AUPRC: 0.5894
+Best F1 improved: 0.3077 → 0.6456
+Iter [410/1200] Loss: 0.5036 LR: 0.000739
+Iter [420/1200] Loss: 0.4184 LR: 0.000727
+Iter [430/1200] Loss: 0.5764 LR: 0.000715
+Iter [440/1200] Loss: 0.5043 LR: 0.000703
+Iter [450/1200] Loss: 0.4163 LR: 0.000691
+Iter [460/1200] Loss: 0.5714 LR: 0.000679
+Iter [470/1200] Loss: 0.5050 LR: 0.000667
+Iter [480/1200] Loss: 0.4145 LR: 0.000655
+Iter [490/1200] Loss: 0.5671 LR: 0.000642
+Iter [500/1200] Loss: 0.5058 LR: 0.000629
+Iter [510/1200] Loss: 0.4129 LR: 0.000617
+Iter [520/1200] Loss: 0.5633 LR: 0.000604
+Iter [530/1200] Loss: 0.5065 LR: 0.000591
+Iter [540/1200] Loss: 0.4116 LR: 0.000578
+Iter [550/1200] Loss: 0.5601 LR: 0.000565
+Iter [560/1200] Loss: 0.5073 LR: 0.000552
+Iter [570/1200] Loss: 0.4105 LR: 0.000539
+Iter [580/1200] Loss: 0.5573 LR: 0.000526
+Iter [590/1200] Loss: 0.5080 LR: 0.000513
+Iter [600/1200] Loss: 0.4095 LR: 0.000500
+Evaluating on validation set...
+Val [600/1200] Acc: 0.6154 F1: 0.6456 Prec: 0.5952 Rec: 0.6333 AUROC: 0.5667 AUPRC: 0.5894
+Iter [610/1200] Loss: 0.5550 LR: 0.000487
+Iter [620/1200] Loss: 0.5086 LR: 0.000474
+Iter [630/1200] Loss: 0.4087 LR: 0.000461
+Iter [640/1200] Loss: 0.5530 LR: 0.000448
+Iter [650/1200] Loss: 0.5092 LR: 0.000435
+Iter [660/1200] Loss: 0.4080 LR: 0.000422
+Iter [670/1200] Loss: 0.5512 LR: 0.000409
+Iter [680/1200] Loss: 0.5097 LR: 0.000396
+Iter [690/1200] Loss: 0.4074 LR: 0.000383
+Iter [700/1200] Loss: 0.5498 LR: 0.000371
+Iter [710/1200] Loss: 0.5102 LR: 0.000358
+Iter [720/1200] Loss: 0.4069 LR: 0.000345
+Iter [730/1200] Loss: 0.5485 LR: 0.000333
+Iter [740/1200] Loss: 0.5106 LR: 0.000321
+Iter [750/1200] Loss: 0.4065 LR: 0.000309
+Iter [760/1200] Loss: 0.5475 LR: 0.000297
+Iter [770/1200] Loss: 0.5110 LR: 0.000285
+Iter [780/1200] Loss: 0.4062 LR: 0.000273
+Iter [790/1200] Loss: 0.5466 LR: 0.000261
+Iter [800/1200] Loss: 0.5113 LR: 0.000250
+Evaluating on validation set...
+Val [800/1200] Acc: 0.6154 F1: 0.6456 Prec: 0.5952 Rec: 0.6333 AUROC: 0.5667 AUPRC: 0.5894
+Iter [810/1200] Loss: 0.4059 LR: 0.000239
+Iter [820/1200] Loss: 0.5459 LR: 0.000228
+Iter [830/1200] Loss: 0.5116 LR: 0.000217
+Iter [840/1200] Loss: 0.4057 LR: 0.000206
+Iter [850/1200] Loss: 0.5452 LR: 0.000196
+Iter [860/1200] Loss: 0.5118 LR: 0.000185
+Iter [870/1200] Loss: 0.4055 LR: 0.000175
+Iter [880/1200] Loss: 0.5447 LR: 0.000165
+Iter [890/1200] Loss: 0.5120 LR: 0.000156
+Iter [900/1200] Loss: 0.4053 LR: 0.000146
+Iter [910/1200] Loss: 0.5443 LR: 0.000137
+Iter [920/1200] Loss: 0.5121 LR: 0.000128
+Iter [930/1200] Loss: 0.4052 LR: 0.000120
+Iter [940/1200] Loss: 0.5440 LR: 0.000111
+Iter [950/1200] Loss: 0.5122 LR: 0.000103
+Iter [960/1200] Loss: 0.4051 LR: 0.000095
+Iter [970/1200] Loss: 0.5437 LR: 0.000088
+Iter [980/1200] Loss: 0.5123 LR: 0.000081
+Iter [990/1200] Loss: 0.4050 LR: 0.000074
+Iter [1000/1200] Loss: 0.5435 LR: 0.000067
+Evaluating on validation set...
+Val [1000/1200] Acc: 0.6154 F1: 0.6456 Prec: 0.5952 Rec: 0.6333 AUROC: 0.5667 AUPRC: 0.5894
+Iter [1010/1200] Loss: 0.5124 LR: 0.000061
+Iter [1020/1200] Loss: 0.4049 LR: 0.000054
+Iter [1030/1200] Loss: 0.5434 LR: 0.000049
+Iter [1040/1200] Loss: 0.5125 LR: 0.000043
+Iter [1050/1200] Loss: 0.4049 LR: 0.000038
+Iter [1060/1200] Loss: 0.5433 LR: 0.000033
+Iter [1070/1200] Loss: 0.5125 LR: 0.000029
+Iter [1080/1200] Loss: 0.4049 LR: 0.000024
+Iter [1090/1200] Loss: 0.5432 LR: 0.000021
+Iter [1100/1200] Loss: 0.5125 LR: 0.000017
+Iter [1110/1200] Loss: 0.4049 LR: 0.000014
+Iter [1120/1200] Loss: 0.5432 LR: 0.000011
+Iter [1130/1200] Loss: 0.5125 LR: 0.000008
+Iter [1140/1200] Loss: 0.4048 LR: 0.000006
+Iter [1150/1200] Loss: 0.5431 LR: 0.000004
+Iter [1160/1200] Loss: 0.5125 LR: 0.000003
+Iter [1170/1200] Loss: 0.4048 LR: 0.000002
+Iter [1180/1200] Loss: 0.5431 LR: 0.000001
+Iter [1190/1200] Loss: 0.5125 LR: 0.000000
+Iter [1200/1200] Loss: 0.4048 LR: 0.000000
+Evaluating on validation set...
+/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:313: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  torch.load(os.path.join(output_dir, 'best_model.pth'))
+Val [1200/1200] Acc: 0.6154 F1: 0.6456 Prec: 0.5952 Rec: 0.6333 AUROC: 0.5667 AUPRC: 0.5894
+Alpha: 1.1717
+Beta: 0.8673
+Evaluating on test set...
+Test Accuracy: 0.9091 F1: 0.9027 Precision: 0.9444 Recall: 0.8333 AUROC: 0.9583 AUPRC: 0.9514
+Training complete.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Running variant: fusion_mri_histo
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Command:
+ python3 /gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py --batch_size 32 --train_iters 1200 --lr 0.001 --min_lr 0.0 --optim adam --momentum 0.0 --weight_decay 0.0001 --eval_interval 200 --num_workers 4 --seed 42 --dataset_csv /gscratch/kurtlab/CoreBT/dataset_utils/fusion/corebt_fusion_dataset_LGG_HGG_case_sharedtest.csv --zip_path_mri /gscratch/scrubbed/juampablo/corebt/mri_embeddings.zip --zip_path_histo /gscratch/scrubbed/juampablo/corebt/corebt_clam_preprocessing/slide_embeddings.zip --output_dir /gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/LGG_HGG/fusion_mri_histo/ --mri_probe_path /gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/LGG_HGG/mri_only/best_model.pth --histo_probe_path /gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/LGG_HGG/histo_only/best_model.pth
+
+Collecting results...
+Collected fusion_mri_histo
+
+Saved combined summary to:
+/gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/LGG_HGG/summary.json
+
+All requested runs completed successfully.
+Namespace(dataset_csv='/gscratch/kurtlab/CoreBT/dataset_utils/fusion/corebt_fusion_dataset_LEVEL1_case_sharedtest.csv', zip_path_mri='/gscratch/scrubbed/juampablo/corebt/mri_embeddings.zip', zip_path_histo='/gscratch/scrubbed/juampablo/corebt/corebt_clam_preprocessing/slide_embeddings.zip', histo_embed_dim=768, mri_embed_dim=768, batch_size=32, train_iters=1200, lr=0.001, min_lr=0.0, optim='adam', momentum=0.0, weight_decay=0.0001, eval_interval=200, model_select='best', num_workers=4, seed=42, z_score=False, output_dir='/gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/Level1Class/fusion_mri_histo/', mri_probe_path='/gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/Level1Class/mri_only/best_model.pth', histo_probe_path='/gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/Level1Class/histo_only/best_model.pth')
+Found 240 files in zip
+  0%|          | 0/240 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1151: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(byte_stream, map_location="cpu")
+  1%|▏         | 3/240 [00:00<00:08, 27.75it/s]  2%|▎         | 6/240 [00:00<00:09, 25.72it/s]  4%|▍         | 9/240 [00:00<00:08, 26.07it/s]  5%|▌         | 12/240 [00:00<00:08, 26.11it/s]  6%|▋         | 15/240 [00:00<00:08, 25.36it/s]  8%|▊         | 18/240 [00:00<00:08, 25.65it/s]  9%|▉         | 21/240 [00:00<00:08, 25.28it/s] 10%|█         | 24/240 [00:00<00:08, 25.63it/s] 11%|█▏        | 27/240 [00:01<00:07, 26.65it/s] 12%|█▎        | 30/240 [00:01<00:07, 26.60it/s] 14%|█▍        | 33/240 [00:01<00:07, 26.63it/s] 15%|█▌        | 36/240 [00:01<00:07, 26.93it/s] 16%|█▋        | 39/240 [00:01<00:07, 26.23it/s] 18%|█▊        | 42/240 [00:01<00:07, 25.72it/s] 19%|█▉        | 45/240 [00:01<00:07, 25.72it/s] 20%|██        | 48/240 [00:01<00:07, 25.45it/s] 21%|██▏       | 51/240 [00:01<00:07, 25.76it/s] 22%|██▎       | 54/240 [00:02<00:07, 25.33it/s] 24%|██▍       | 57/240 [00:02<00:07, 25.14it/s] 25%|██▌       | 60/240 [00:02<00:07, 25.47it/s] 26%|██▋       | 63/240 [00:02<00:07, 25.25it/s] 28%|██▊       | 66/240 [00:02<00:06, 26.30it/s] 29%|██▉       | 69/240 [00:02<00:06, 25.81it/s] 30%|███       | 72/240 [00:02<00:06, 25.84it/s] 31%|███▏      | 75/240 [00:02<00:06, 25.53it/s] 32%|███▎      | 78/240 [00:03<00:06, 25.27it/s] 34%|███▍      | 81/240 [00:03<00:06, 24.80it/s] 35%|███▌      | 84/240 [00:03<00:06, 24.78it/s] 36%|███▋      | 87/240 [00:03<00:06, 25.24it/s] 38%|███▊      | 90/240 [00:03<00:05, 25.63it/s] 39%|███▉      | 93/240 [00:03<00:05, 25.24it/s] 40%|████      | 96/240 [00:03<00:05, 25.65it/s] 41%|████▏     | 99/240 [00:03<00:05, 25.10it/s] 42%|████▎     | 102/240 [00:03<00:05, 25.48it/s] 44%|████▍     | 105/240 [00:04<00:05, 26.42it/s] 45%|████▌     | 108/240 [00:04<00:05, 25.48it/s] 46%|████▋     | 111/240 [00:04<00:05, 24.78it/s] 48%|████▊     | 114/240 [00:04<00:05, 24.51it/s] 49%|████▉     | 117/240 [00:04<00:04, 25.12it/s] 50%|█████     | 120/240 [00:04<00:04, 24.58it/s] 51%|█████▏    | 123/240 [00:04<00:04, 24.44it/s] 52%|█████▎    | 126/240 [00:04<00:04, 25.63it/s] 54%|█████▍    | 129/240 [00:05<00:04, 25.70it/s] 55%|█████▌    | 132/240 [00:05<00:04, 25.94it/s] 56%|█████▋    | 135/240 [00:05<00:04, 26.04it/s] 57%|█████▊    | 138/240 [00:05<00:03, 26.15it/s] 59%|█████▉    | 141/240 [00:05<00:03, 25.65it/s] 60%|██████    | 144/240 [00:05<00:03, 25.33it/s] 61%|██████▏   | 147/240 [00:05<00:03, 25.72it/s] 62%|██████▎   | 150/240 [00:05<00:03, 26.73it/s] 64%|██████▍   | 153/240 [00:05<00:03, 26.70it/s] 65%|██████▌   | 156/240 [00:06<00:03, 26.57it/s] 66%|██████▋   | 159/240 [00:06<00:03, 26.51it/s] 68%|██████▊   | 162/240 [00:06<00:02, 26.72it/s] 69%|██████▉   | 165/240 [00:06<00:02, 26.90it/s] 70%|███████   | 168/240 [00:06<00:02, 26.94it/s] 71%|███████▏  | 171/240 [00:06<00:02, 26.17it/s] 72%|███████▎  | 174/240 [00:06<00:02, 26.79it/s] 74%|███████▍  | 177/240 [00:06<00:02, 27.50it/s] 75%|███████▌  | 180/240 [00:06<00:02, 26.53it/s] 76%|███████▋  | 183/240 [00:07<00:02, 25.95it/s] 78%|███████▊  | 186/240 [00:07<00:02, 26.10it/s] 79%|███████▉  | 189/240 [00:07<00:01, 27.09it/s] 80%|████████  | 192/240 [00:07<00:01, 26.86it/s] 81%|████████▏ | 195/240 [00:07<00:01, 27.03it/s] 82%|████████▎ | 198/240 [00:07<00:01, 27.61it/s] 84%|████████▍ | 201/240 [00:07<00:01, 26.65it/s] 85%|████████▌ | 204/240 [00:07<00:01, 25.97it/s] 86%|████████▋ | 207/240 [00:07<00:01, 25.54it/s] 88%|████████▊ | 210/240 [00:08<00:01, 25.23it/s] 89%|████████▉ | 213/240 [00:08<00:01, 25.06it/s] 90%|█████████ | 216/240 [00:08<00:00, 24.87it/s] 91%|█████████▏| 219/240 [00:08<00:00, 25.15it/s] 92%|█████████▎| 222/240 [00:08<00:00, 25.37it/s] 94%|█████████▍| 226/240 [00:08<00:00, 27.03it/s] 95%|█████████▌| 229/240 [00:08<00:00, 26.23it/s] 97%|█████████▋| 232/240 [00:08<00:00, 26.38it/s] 98%|█████████▊| 235/240 [00:09<00:00, 25.81it/s] 99%|█████████▉| 238/240 [00:09<00:00, 25.58it/s]100%|██████████| 240/240 [00:09<00:00, 25.84it/s]
+Loaded 239 embeddings
+Embeddings shape: torch.Size([768])
+  0%|          | 0/522 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1182: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(io.BytesIO(file_bytes))['last_layer_embed']
+ 26%|██▌       | 134/522 [00:00<00:00, 1331.55it/s] 52%|█████▏    | 269/522 [00:00<00:00, 1341.04it/s] 78%|███████▊  | 406/522 [00:00<00:00, 1353.13it/s]100%|██████████| 522/522 [00:00<00:00, 1352.60it/s]
+  0%|[31m          [0m| 0/89 [00:00<?, ?it/s]100%|[31m██████████[0m| 89/89 [00:00<00:00, 50234.57it/s]
+Found 240 files in zip
+  0%|          | 0/240 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1151: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(byte_stream, map_location="cpu")
+  2%|▏         | 4/240 [00:00<00:07, 31.76it/s]  3%|▎         | 8/240 [00:00<00:08, 28.50it/s]  5%|▍         | 11/240 [00:00<00:08, 27.59it/s]  6%|▌         | 14/240 [00:00<00:08, 26.12it/s]  7%|▋         | 17/240 [00:00<00:08, 25.04it/s]  8%|▊         | 20/240 [00:00<00:08, 25.44it/s] 10%|▉         | 23/240 [00:00<00:08, 25.84it/s] 11%|█         | 26/240 [00:00<00:08, 26.05it/s] 12%|█▏        | 29/240 [00:01<00:07, 27.04it/s] 13%|█▎        | 32/240 [00:01<00:07, 26.10it/s] 15%|█▍        | 35/240 [00:01<00:07, 27.10it/s] 16%|█▌        | 38/240 [00:01<00:07, 26.10it/s] 17%|█▋        | 41/240 [00:01<00:07, 25.45it/s] 18%|█▊        | 44/240 [00:01<00:07, 25.53it/s] 20%|█▉        | 47/240 [00:01<00:07, 25.05it/s] 21%|██        | 50/240 [00:01<00:07, 25.47it/s] 22%|██▏       | 53/240 [00:02<00:07, 24.94it/s] 23%|██▎       | 56/240 [00:02<00:07, 25.23it/s] 25%|██▍       | 59/240 [00:02<00:07, 25.52it/s] 26%|██▌       | 62/240 [00:02<00:07, 25.14it/s] 27%|██▋       | 65/240 [00:02<00:06, 26.19it/s] 28%|██▊       | 68/240 [00:02<00:06, 25.61it/s] 30%|██▉       | 71/240 [00:02<00:06, 25.69it/s] 31%|███       | 74/240 [00:02<00:06, 25.42it/s] 32%|███▏      | 77/240 [00:02<00:06, 25.03it/s] 33%|███▎      | 80/240 [00:03<00:06, 24.79it/s] 35%|███▍      | 83/240 [00:03<00:06, 24.61it/s] 36%|███▌      | 86/240 [00:03<00:06, 25.27it/s] 37%|███▋      | 89/240 [00:03<00:05, 25.66it/s] 38%|███▊      | 92/240 [00:03<00:05, 25.30it/s] 40%|███▉      | 95/240 [00:03<00:05, 24.95it/s] 41%|████      | 98/240 [00:03<00:05, 25.28it/s] 42%|████▏     | 101/240 [00:03<00:05, 25.69it/s] 43%|████▎     | 104/240 [00:04<00:05, 25.91it/s] 45%|████▍     | 107/240 [00:04<00:05, 26.03it/s] 46%|████▌     | 110/240 [00:04<00:05, 25.34it/s] 47%|████▋     | 113/240 [00:04<00:05, 25.02it/s] 48%|████▊     | 116/240 [00:04<00:04, 25.27it/s] 50%|████▉     | 119/240 [00:04<00:04, 24.91it/s] 51%|█████     | 122/240 [00:04<00:04, 24.56it/s] 52%|█████▏    | 125/240 [00:04<00:04, 24.90it/s] 53%|█████▎    | 128/240 [00:04<00:04, 25.74it/s] 55%|█████▍    | 131/240 [00:05<00:04, 25.76it/s] 56%|█████▌    | 134/240 [00:05<00:04, 26.06it/s] 57%|█████▋    | 137/240 [00:05<00:03, 25.80it/s] 58%|█████▊    | 140/240 [00:05<00:03, 25.24it/s] 60%|█████▉    | 143/240 [00:05<00:03, 24.77it/s] 61%|██████    | 146/240 [00:05<00:03, 24.49it/s] 62%|██████▏   | 149/240 [00:05<00:03, 25.81it/s] 63%|██████▎   | 152/240 [00:05<00:03, 26.83it/s] 65%|██████▍   | 155/240 [00:06<00:03, 25.77it/s] 66%|██████▌   | 158/240 [00:06<00:03, 25.80it/s] 67%|██████▋   | 161/240 [00:06<00:02, 26.68it/s] 68%|██████▊   | 164/240 [00:06<00:02, 26.79it/s] 70%|██████▉   | 167/240 [00:06<00:02, 26.13it/s] 71%|███████   | 170/240 [00:06<00:02, 26.41it/s] 72%|███████▏  | 173/240 [00:06<00:02, 26.51it/s] 73%|███████▎  | 176/240 [00:06<00:02, 27.22it/s] 75%|███████▍  | 179/240 [00:06<00:02, 27.07it/s] 76%|███████▌  | 182/240 [00:07<00:02, 26.16it/s] 77%|███████▋  | 185/240 [00:07<00:02, 26.19it/s] 78%|███████▊  | 188/240 [00:07<00:01, 26.24it/s] 80%|███████▉  | 191/240 [00:07<00:01, 27.01it/s] 81%|████████  | 194/240 [00:07<00:01, 26.35it/s] 82%|████████▎ | 198/240 [00:07<00:01, 27.67it/s] 84%|████████▍ | 201/240 [00:07<00:01, 26.70it/s] 85%|████████▌ | 204/240 [00:07<00:01, 26.00it/s] 86%|████████▋ | 207/240 [00:08<00:01, 25.47it/s] 88%|████████▊ | 210/240 [00:08<00:01, 24.91it/s] 89%|████████▉ | 213/240 [00:08<00:01, 24.55it/s] 90%|█████████ | 216/240 [00:08<00:00, 24.37it/s] 91%|█████████▏| 219/240 [00:08<00:00, 24.67it/s] 92%|█████████▎| 222/240 [00:08<00:00, 24.97it/s] 94%|█████████▍| 226/240 [00:08<00:00, 26.71it/s] 95%|█████████▌| 229/240 [00:08<00:00, 25.73it/s] 97%|█████████▋| 232/240 [00:09<00:00, 25.81it/s] 98%|█████████▊| 235/240 [00:09<00:00, 25.16it/s] 99%|█████████▉| 238/240 [00:09<00:00, 24.95it/s]100%|██████████| 240/240 [00:09<00:00, 25.70it/s]
+Loaded 239 embeddings
+Embeddings shape: torch.Size([768])
+  0%|          | 0/522 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1182: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(io.BytesIO(file_bytes))['last_layer_embed']
+ 26%|██▌       | 135/522 [00:00<00:00, 1345.20it/s] 52%|█████▏    | 270/522 [00:00<00:00, 1346.41it/s] 78%|███████▊  | 408/522 [00:00<00:00, 1359.42it/s]100%|██████████| 522/522 [00:00<00:00, 1356.53it/s]
+  0%|[31m          [0m| 0/89 [00:00<?, ?it/s]100%|[31m██████████[0m| 89/89 [00:00<00:00, 54791.29it/s]
+Found 240 files in zip
+  0%|          | 0/240 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1151: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(byte_stream, map_location="cpu")
+  2%|▏         | 4/240 [00:00<00:07, 31.53it/s]  3%|▎         | 8/240 [00:00<00:08, 28.22it/s]  5%|▍         | 11/240 [00:00<00:08, 27.26it/s]  6%|▌         | 14/240 [00:00<00:08, 25.98it/s]  7%|▋         | 17/240 [00:00<00:08, 25.06it/s]  8%|▊         | 20/240 [00:00<00:08, 25.11it/s] 10%|▉         | 23/240 [00:00<00:08, 25.49it/s] 11%|█         | 26/240 [00:00<00:08, 25.62it/s] 12%|█▏        | 29/240 [00:01<00:07, 26.54it/s] 13%|█▎        | 32/240 [00:01<00:08, 25.88it/s] 15%|█▌        | 36/240 [00:01<00:07, 26.87it/s] 16%|█▋        | 39/240 [00:01<00:07, 26.13it/s] 18%|█▊        | 42/240 [00:01<00:07, 25.66it/s] 19%|█▉        | 45/240 [00:01<00:07, 25.88it/s] 20%|██        | 48/240 [00:01<00:07, 25.56it/s] 21%|██▏       | 51/240 [00:01<00:07, 25.78it/s] 22%|██▎       | 54/240 [00:02<00:07, 25.36it/s] 24%|██▍       | 57/240 [00:02<00:07, 25.54it/s] 25%|██▌       | 60/240 [00:02<00:06, 25.91it/s] 26%|██▋       | 63/240 [00:02<00:07, 24.25it/s] 28%|██▊       | 66/240 [00:02<00:06, 25.28it/s] 29%|██▉       | 69/240 [00:02<00:06, 24.93it/s] 30%|███       | 72/240 [00:02<00:06, 25.17it/s] 31%|███▏      | 75/240 [00:02<00:06, 25.08it/s] 32%|███▎      | 78/240 [00:03<00:06, 24.88it/s] 34%|███▍      | 81/240 [00:03<00:06, 24.61it/s] 35%|███▌      | 84/240 [00:03<00:06, 24.46it/s] 36%|███▋      | 87/240 [00:03<00:06, 25.08it/s] 38%|███▊      | 90/240 [00:03<00:05, 25.48it/s] 39%|███▉      | 93/240 [00:03<00:05, 25.04it/s] 40%|████      | 96/240 [00:03<00:05, 25.36it/s] 41%|████▏     | 99/240 [00:03<00:05, 24.88it/s] 42%|████▎     | 102/240 [00:03<00:05, 25.27it/s] 44%|████▍     | 105/240 [00:04<00:05, 26.22it/s] 45%|████▌     | 108/240 [00:04<00:05, 25.47it/s] 46%|████▋     | 111/240 [00:04<00:05, 24.94it/s] 48%|████▊     | 114/240 [00:04<00:05, 24.67it/s] 49%|████▉     | 117/240 [00:04<00:04, 25.29it/s] 50%|█████     | 120/240 [00:04<00:04, 24.73it/s] 51%|█████▏    | 123/240 [00:04<00:04, 24.51it/s] 52%|█████▎    | 126/240 [00:04<00:04, 25.75it/s] 54%|█████▍    | 129/240 [00:05<00:04, 25.76it/s] 55%|█████▌    | 132/240 [00:05<00:04, 25.83it/s] 56%|█████▋    | 135/240 [00:05<00:04, 25.79it/s] 57%|█████▊    | 138/240 [00:05<00:03, 25.60it/s] 59%|█████▉    | 141/240 [00:05<00:03, 24.95it/s] 60%|██████    | 144/240 [00:05<00:03, 24.49it/s] 61%|██████▏   | 147/240 [00:05<00:03, 24.77it/s] 62%|██████▎   | 150/240 [00:05<00:03, 25.71it/s] 64%|██████▍   | 153/240 [00:06<00:03, 25.92it/s] 65%|██████▌   | 156/240 [00:06<00:03, 25.86it/s] 66%|██████▋   | 159/240 [00:06<00:03, 25.87it/s] 68%|██████▊   | 162/240 [00:06<00:02, 26.25it/s] 69%|██████▉   | 165/240 [00:06<00:02, 26.50it/s] 70%|███████   | 168/240 [00:06<00:02, 26.49it/s] 71%|███████▏  | 171/240 [00:06<00:02, 25.73it/s] 72%|███████▎  | 174/240 [00:06<00:02, 26.53it/s] 74%|███████▍  | 177/240 [00:06<00:02, 27.32it/s] 75%|███████▌  | 180/240 [00:07<00:02, 26.23it/s] 76%|███████▋  | 183/240 [00:07<00:02, 25.57it/s] 78%|███████▊  | 186/240 [00:07<00:02, 25.69it/s] 79%|███████▉  | 189/240 [00:07<00:01, 26.80it/s] 80%|████████  | 192/240 [00:07<00:01, 26.64it/s] 81%|████████▏ | 195/240 [00:07<00:01, 26.69it/s] 82%|████████▎ | 198/240 [00:07<00:01, 27.34it/s] 84%|████████▍ | 201/240 [00:07<00:01, 26.26it/s] 85%|████████▌ | 204/240 [00:07<00:01, 25.58it/s] 86%|████████▋ | 207/240 [00:08<00:01, 25.12it/s] 88%|████████▊ | 210/240 [00:08<00:01, 24.89it/s] 89%|████████▉ | 213/240 [00:08<00:01, 24.74it/s] 90%|█████████ | 216/240 [00:08<00:00, 24.54it/s] 91%|█████████▏| 219/240 [00:08<00:00, 24.83it/s] 92%|█████████▎| 222/240 [00:08<00:00, 25.13it/s] 94%|█████████▍| 226/240 [00:08<00:00, 26.85it/s] 95%|█████████▌| 229/240 [00:08<00:00, 26.00it/s] 97%|█████████▋| 232/240 [00:09<00:00, 26.12it/s] 98%|█████████▊| 235/240 [00:09<00:00, 25.50it/s] 99%|█████████▉| 238/240 [00:09<00:00, 25.20it/s]100%|██████████| 240/240 [00:09<00:00, 25.61it/s]
+Loaded 239 embeddings
+Embeddings shape: torch.Size([768])
+  0%|          | 0/522 [00:00<?, ?it/s]/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:1182: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  tensor = torch.load(io.BytesIO(file_bytes))['last_layer_embed']
+ 26%|██▌       | 136/522 [00:00<00:00, 1354.28it/s] 52%|█████▏    | 272/522 [00:00<00:00, 1355.11it/s] 79%|███████▊  | 410/522 [00:00<00:00, 1364.72it/s]100%|██████████| 522/522 [00:00<00:00, 1362.79it/s]
+  0%|[31m          [0m| 0/89 [00:00<?, ?it/s]100%|[31m██████████[0m| 89/89 [00:00<00:00, 53205.97it/s]
+
+======================================================================
+TRAIN SUMMARY
+======================================================================
+Total samples: 179
+Label mapping (label_dict):
+{np.int64(0): 0, np.int64(1): 1, np.int64(2): 2, np.int64(3): 3, np.int64(4): 4, np.int64(5): 5, np.int64(7): 6}
+
+Label distribution:
+  Class 0: 91
+  Class 1: 49
+  Class 2: 18
+  Class 3: 8
+  Class 4: 5
+  Class 5: 2
+  Class 6: 6
+Unique labels in this split: [0, 1, 2, 3, 4, 5, 6]
+
+MRI embeddings loaded: 239
+Histo embeddings loaded: 89
+======================================================================
+
+
+======================================================================
+VAL SUMMARY
+======================================================================
+Total samples: 13
+Label mapping (label_dict):
+{np.int64(0): 0, np.int64(1): 1, np.int64(2): 2, np.int64(3): 3, np.int64(4): 4, np.int64(5): 5, np.int64(7): 6}
+
+Label distribution:
+  Class 0: 5
+  Class 1: 4
+  Class 2: 2
+  Class 3: 1
+  Class 4: 1
+Unique labels in this split: [0, 1, 2, 3, 4]
+
+MRI embeddings loaded: 239
+Histo embeddings loaded: 89
+======================================================================
+
+
+======================================================================
+TEST SUMMARY
+======================================================================
+Total samples: 11
+Label mapping (label_dict):
+{np.int64(0): 0, np.int64(1): 1, np.int64(2): 2, np.int64(3): 3, np.int64(4): 4, np.int64(5): 5, np.int64(7): 6}
+
+Label distribution:
+  Class 0: 7
+  Class 1: 2
+  Class 2: 2
+Unique labels in this split: [0, 1, 2]
+
+MRI embeddings loaded: 239
+Histo embeddings loaded: 89
+======================================================================
+
+First 5 raw labels:
+0 <class 'int'> 0
+1 <class 'int'> 0
+2 <class 'int'> 1
+3 <class 'int'> 0
+4 <class 'int'> 1
+Zero MRI: 22 / 179
+Zero Histo: 130 / 179
+Both zero: 0 / 179
+/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:69: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  mri_state = torch.load(mri_probe_path, map_location=device)
+/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:78: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  histo_state = torch.load(histo_probe_path, map_location=device)
+Zero MRI: 1 / 11
+Zero Histo: 0 / 11
+Both zero: 0 / 11
+Set optimizer: adam
+Start training
+Iter [10/1200] Loss: 1.6210 LR: 0.001000
+Iter [20/1200] Loss: 1.7903 LR: 0.000999
+Iter [30/1200] Loss: 1.8994 LR: 0.000998
+Iter [40/1200] Loss: 1.4301 LR: 0.000997
+Iter [50/1200] Loss: 1.6231 LR: 0.000996
+Iter [60/1200] Loss: 1.7141 LR: 0.000994
+Iter [70/1200] Loss: 1.2691 LR: 0.000992
+Iter [80/1200] Loss: 1.5517 LR: 0.000989
+Iter [90/1200] Loss: 1.6665 LR: 0.000986
+Iter [100/1200] Loss: 1.2143 LR: 0.000983
+Iter [110/1200] Loss: 1.4809 LR: 0.000979
+Iter [120/1200] Loss: 1.6420 LR: 0.000976
+Iter [130/1200] Loss: 1.1395 LR: 0.000971
+Iter [140/1200] Loss: 1.4405 LR: 0.000967
+Iter [150/1200] Loss: 1.5323 LR: 0.000962
+Iter [160/1200] Loss: 1.1209 LR: 0.000957
+Iter [170/1200] Loss: 1.4548 LR: 0.000951
+Iter [180/1200] Loss: 1.5791 LR: 0.000946
+Iter [190/1200] Loss: 1.1242 LR: 0.000939
+Iter [200/1200] Loss: 1.3845 LR: 0.000933
+Evaluating on validation set...
+Val [200/1200] Acc: 0.0769 F1: 0.0769 Prec: 0.0833 Rec: 0.0833 AUROC: 0.5062 AUPRC: 0.3242
+Best F1 improved: 0.0000 → 0.0769
+Iter [210/1200] Loss: 1.5538 LR: 0.000926
+Iter [220/1200] Loss: 1.0703 LR: 0.000919
+Iter [230/1200] Loss: 1.3624 LR: 0.000912
+Iter [240/1200] Loss: 1.5398 LR: 0.000905
+Iter [250/1200] Loss: 1.0448 LR: 0.000897
+Iter [260/1200] Loss: 1.3429 LR: 0.000889
+Iter [270/1200] Loss: 1.5251 LR: 0.000880
+Iter [280/1200] Loss: 1.0220 LR: 0.000872
+Iter [290/1200] Loss: 1.3247 LR: 0.000863
+Iter [300/1200] Loss: 1.5099 LR: 0.000854
+Iter [310/1200] Loss: 1.0012 LR: 0.000844
+Iter [320/1200] Loss: 1.3071 LR: 0.000835
+Iter [330/1200] Loss: 1.4940 LR: 0.000825
+Iter [340/1200] Loss: 0.9819 LR: 0.000815
+Iter [350/1200] Loss: 1.2899 LR: 0.000804
+Iter [360/1200] Loss: 1.4779 LR: 0.000794
+Iter [370/1200] Loss: 0.9640 LR: 0.000783
+Iter [380/1200] Loss: 1.2731 LR: 0.000772
+Iter [390/1200] Loss: 1.4616 LR: 0.000761
+Iter [400/1200] Loss: 0.9474 LR: 0.000750
+Evaluating on validation set...
+Val [400/1200] Acc: 0.0769 F1: 0.0769 Prec: 0.0833 Rec: 0.0833 AUROC: 0.5232 AUPRC: 0.3706
+Iter [410/1200] Loss: 1.2569 LR: 0.000739
+Iter [420/1200] Loss: 1.4455 LR: 0.000727
+Iter [430/1200] Loss: 0.9321 LR: 0.000715
+Iter [440/1200] Loss: 1.2415 LR: 0.000703
+Iter [450/1200] Loss: 1.4300 LR: 0.000691
+Iter [460/1200] Loss: 0.9179 LR: 0.000679
+Iter [470/1200] Loss: 1.2269 LR: 0.000667
+Iter [480/1200] Loss: 1.4153 LR: 0.000655
+Iter [490/1200] Loss: 0.9050 LR: 0.000642
+Iter [500/1200] Loss: 1.2132 LR: 0.000629
+Iter [510/1200] Loss: 1.4015 LR: 0.000617
+Iter [520/1200] Loss: 0.8931 LR: 0.000604
+Iter [530/1200] Loss: 1.2005 LR: 0.000591
+Iter [540/1200] Loss: 1.3887 LR: 0.000578
+Iter [550/1200] Loss: 0.8824 LR: 0.000565
+Iter [560/1200] Loss: 1.1888 LR: 0.000552
+Iter [570/1200] Loss: 1.3769 LR: 0.000539
+Iter [580/1200] Loss: 0.8727 LR: 0.000526
+Iter [590/1200] Loss: 1.1782 LR: 0.000513
+Iter [600/1200] Loss: 1.3662 LR: 0.000500
+Evaluating on validation set...
+Val [600/1200] Acc: 0.0769 F1: 0.0769 Prec: 0.0833 Rec: 0.0833 AUROC: 0.4899 AUPRC: 0.3530
+Iter [610/1200] Loss: 0.8640 LR: 0.000487
+Iter [620/1200] Loss: 1.1685 LR: 0.000474
+Iter [630/1200] Loss: 1.3566 LR: 0.000461
+Iter [640/1200] Loss: 0.8562 LR: 0.000448
+Iter [650/1200] Loss: 1.1597 LR: 0.000435
+Iter [660/1200] Loss: 1.3479 LR: 0.000422
+Iter [670/1200] Loss: 0.8493 LR: 0.000409
+Iter [680/1200] Loss: 1.1518 LR: 0.000396
+Iter [690/1200] Loss: 1.3401 LR: 0.000383
+Iter [700/1200] Loss: 0.8431 LR: 0.000371
+Iter [710/1200] Loss: 1.1448 LR: 0.000358
+Iter [720/1200] Loss: 1.3333 LR: 0.000345
+Iter [730/1200] Loss: 0.8377 LR: 0.000333
+Iter [740/1200] Loss: 1.1386 LR: 0.000321
+Iter [750/1200] Loss: 1.3272 LR: 0.000309
+Iter [760/1200] Loss: 0.8330 LR: 0.000297
+Iter [770/1200] Loss: 1.1332 LR: 0.000285
+Iter [780/1200] Loss: 1.3220 LR: 0.000273
+Iter [790/1200] Loss: 0.8289 LR: 0.000261
+Iter [800/1200] Loss: 1.1285 LR: 0.000250
+Evaluating on validation set...
+Val [800/1200] Acc: 0.1538 F1: 0.2000 Prec: 0.2500 Rec: 0.1250 AUROC: 0.4677 AUPRC: 0.3341
+Best F1 improved: 0.0769 → 0.2000
+Iter [810/1200] Loss: 1.3174 LR: 0.000239
+Iter [820/1200] Loss: 0.8254 LR: 0.000228
+Iter [830/1200] Loss: 1.1244 LR: 0.000217
+Iter [840/1200] Loss: 1.3135 LR: 0.000206
+Iter [850/1200] Loss: 0.8224 LR: 0.000196
+Iter [860/1200] Loss: 1.1209 LR: 0.000185
+Iter [870/1200] Loss: 1.3102 LR: 0.000175
+Iter [880/1200] Loss: 0.8198 LR: 0.000165
+Iter [890/1200] Loss: 1.1180 LR: 0.000156
+Iter [900/1200] Loss: 1.3074 LR: 0.000146
+Iter [910/1200] Loss: 0.8178 LR: 0.000137
+Iter [920/1200] Loss: 1.1156 LR: 0.000128
+Iter [930/1200] Loss: 1.3052 LR: 0.000120
+Iter [940/1200] Loss: 0.8161 LR: 0.000111
+Iter [950/1200] Loss: 1.1137 LR: 0.000103
+Iter [960/1200] Loss: 1.3034 LR: 0.000095
+Iter [970/1200] Loss: 0.8147 LR: 0.000088
+Iter [980/1200] Loss: 1.1122 LR: 0.000081
+Iter [990/1200] Loss: 1.3020 LR: 0.000074
+Iter [1000/1200] Loss: 0.8137 LR: 0.000067
+Evaluating on validation set...
+Val [1000/1200] Acc: 0.1538 F1: 0.2000 Prec: 0.2500 Rec: 0.1250 AUROC: 0.4677 AUPRC: 0.3341
+Iter [1010/1200] Loss: 1.1110 LR: 0.000061
+Iter [1020/1200] Loss: 1.3009 LR: 0.000054
+Iter [1030/1200] Loss: 0.8129 LR: 0.000049
+Iter [1040/1200] Loss: 1.1102 LR: 0.000043
+Iter [1050/1200] Loss: 1.3001 LR: 0.000038
+Iter [1060/1200] Loss: 0.8124 LR: 0.000033
+Iter [1070/1200] Loss: 1.1096 LR: 0.000029
+Iter [1080/1200] Loss: 1.2996 LR: 0.000024
+Iter [1090/1200] Loss: 0.8120 LR: 0.000021
+Iter [1100/1200] Loss: 1.1092 LR: 0.000017
+Iter [1110/1200] Loss: 1.2993 LR: 0.000014
+Iter [1120/1200] Loss: 0.8118 LR: 0.000011
+Iter [1130/1200] Loss: 1.1090 LR: 0.000008
+Iter [1140/1200] Loss: 1.2991 LR: 0.000006
+Iter [1150/1200] Loss: 0.8117 LR: 0.000004
+Iter [1160/1200] Loss: 1.1089 LR: 0.000003
+Iter [1170/1200] Loss: 1.2990 LR: 0.000002
+Iter [1180/1200] Loss: 0.8117 LR: 0.000001
+Iter [1190/1200] Loss: 1.1089 LR: 0.000000
+Iter [1200/1200] Loss: 1.2990 LR: 0.000000
+Evaluating on validation set...
+/gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py:313: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  torch.load(os.path.join(output_dir, 'best_model.pth'))
+Val [1200/1200] Acc: 0.1538 F1: 0.2000 Prec: 0.2500 Rec: 0.1250 AUROC: 0.4677 AUPRC: 0.3341
+Alpha: 1.1256
+Beta: 1.1545
+Evaluating on test set...
+Test Accuracy: 0.6364 F1: 0.6667 Precision: 0.3714 Recall: 0.2714 AUROC: 0.8651 AUPRC: 0.7116
+Training complete.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Running variant: fusion_mri_histo
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Command:
+ python3 /gscratch/kurtlab/CoreBT/experiments/corebt_fusion_main.py --batch_size 32 --train_iters 1200 --lr 0.001 --min_lr 0.0 --optim adam --momentum 0.0 --weight_decay 0.0001 --eval_interval 200 --num_workers 4 --seed 42 --dataset_csv /gscratch/kurtlab/CoreBT/dataset_utils/fusion/corebt_fusion_dataset_LEVEL1_case_sharedtest.csv --zip_path_mri /gscratch/scrubbed/juampablo/corebt/mri_embeddings.zip --zip_path_histo /gscratch/scrubbed/juampablo/corebt/corebt_clam_preprocessing/slide_embeddings.zip --output_dir /gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/Level1Class/fusion_mri_histo/ --mri_probe_path /gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/Level1Class/mri_only/best_model.pth --histo_probe_path /gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/Level1Class/histo_only/best_model.pth
+
+Collecting results...
+Collected fusion_mri_histo
+
+Saved combined summary to:
+/gscratch/kurtlab/CoreBT/experiments/corebt_linear_probe_v2/Level1Class/summary.json
+
+All requested runs completed successfully.
