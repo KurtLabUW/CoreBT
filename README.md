@@ -77,7 +77,7 @@ Results are saved in a JSON file to the path provided in `--output_json`.
 // results.json 
 {
   "runs": {
-    "test": {
+    "my_run": {
       "tasks": {
         "level1": {
           "summary": { "num_samples": "..." },
@@ -102,7 +102,7 @@ Results are saved in a JSON file to the path provided in `--output_json`.
             ]
           },
           "task": "level1",
-          "run_id": "test"
+          "run_id": "my_run"
         },
         "lgghgg": { "..." : "Follows level1 structure" },
         "who":    { "..." : "Follows level1 structure" }
