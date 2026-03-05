@@ -36,7 +36,7 @@ Juampablo E. Heras Rivera†, Daniel K Low†, Wen-wai Yim, Jacob Ruzevick, Xavi
 </td>
 </tr>
 </table>
-<div>
+</div>
 
 ![-----------------------------------------------------](assets/purpleline.png)
 
@@ -45,7 +45,7 @@ Juampablo E. Heras Rivera†, Daniel K Low†, Wen-wai Yim, Jacob Ruzevick, Xavi
 To evaluate model predictions, we use:
 
 ```bash
-python eval/evaluate_predictions.py \
+python3 eval/evaluate_predictions.py \
   --submission_csv example_submission.csv \
   --reference_csv eval/corebt_sharedtest_groundtruth_alltasks_trainval.csv \
   --task [all, level1, who, lgghgg] \
