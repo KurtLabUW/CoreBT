@@ -65,7 +65,7 @@ Expected structure:
 | subject_id | level1_pred | lgghgg_pred | who_grade_pred |
 | :--- | :--- | :--- | :--- |
 | U0027924 | 3 | 0 | 0 |
-| U0808219 | 2 | 0 | 1 |
+| U0808219 | 2 | 1 | 1 |
 | ... | ... | ... | ... |
 </div>
 
