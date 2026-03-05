@@ -36,7 +36,58 @@ Juampablo E. Heras Rivera†, Daniel K Low†, Wen-wai Yim, Jacob Ruzevick, Xavi
 </td>
 </tr>
 </table>
-<div">
+<div>
+
+![-----------------------------------------------------](assets/purpleline.png)
+
+## Evaluation
+
+To evaluate model predictions, we use:
+
+```bash
+python eval/evaluate_predictions.py \
+  --submission_csv example_submission.csv \
+  --reference_csv eval/corebt_sharedtest_groundtruth_alltasks_trainval.csv \
+  --task [all, level1, who, lgghgg] \
+  --run_id my_run \
+  --output_json results.json
+```
+
+
+
+The submission file provided via `--submission_csv` must be a CSV with one row per subject, see `eval/example_submission.csv` for an example.
+
+| Column | Type | Description | Expected Range | Example |
+|------|------|-------------|---------------|--------|
+| `subject_id` | string | Unique subject identifier | Any valid subject ID present in the reference CSV | `U0027924` |
+| `level1_pred` | integer | Predicted Level-1 tumor class label | 0–3 | `3` |
+| `lgghgg_pred` | integer | Predicted LGG/HGG label | 0–1 | `0` |
+| `who_grade_pred` | integer | Predicted WHO grade label | 0–2 | `2` |
+
+
+
+If `--output_json` is provided, results are saved in a structured JSON file:
+
+```json
+{
+  "runs": {
+    "my_run": {
+      "tasks": {
+        "level1": {...},
+        "lgghgg": {...},
+        "who": {...}
+      }
+    }
+  }
+}
+```
+
+
+![-----------------------------------------------------](assets/purpleline.png)
+
+
+
+
 
 <h2 align="center">Repo Structure</h2>
 
