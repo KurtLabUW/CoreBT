@@ -47,11 +47,11 @@ Juampablo E. Heras Rivera†, Daniel K Low†, Wen-wai Yim, Jacob Ruzevick, Xavi
 
 ```bash
 python3 eval/evaluate_predictions.py \
-  --submission_csv example_submission.csv \
-  --reference_csv eval/corebt_sharedtest_groundtruth_alltasks_trainval.csv \
-  --task [all, level1, who, lgghgg] \
-  --run_id my_run \
-  --output_json results.json
+  --submission_csv example_submission.csv \ # Path to your model's predictions csv
+  --reference_csv eval/corebt_groundtruth_devset.csv \       # Path to the ground truth labels
+  --task all \                               # Select one or more: [level1, lgghgg, who, all]
+  --run_id my_run \                          # Unique ID for this eval run (defaults to "run")
+  --output_json results.json                 # Path to save results 
 ```
 
 ### Inputs
