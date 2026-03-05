@@ -43,7 +43,7 @@ Juampablo E. Heras Rivera†, Daniel K Low†, Wen-wai Yim, Jacob Ruzevick, Xavi
 
 <h2 align="center">Evaluation</h2>
 
-To evaluate model predictions, we use:
+### Command
 
 ```bash
 python3 eval/evaluate_predictions.py \
@@ -54,8 +54,24 @@ python3 eval/evaluate_predictions.py \
   --output_json results.json
 ```
 
+### Inputs
 
-Results are saved in a structured JSON file to the path provided in `--output_json`:
+The submission file provided via `--submission_csv` must be a CSV with one row per subject, see `eval/example_submission.csv` for an example, and `eval/corebt_sharedtest_groundtruth_alltasks_trainval.csv` to understand how classes are defined in the training split.
+
+Expected structure:
+
+<div align="center">
+
+| subject_id | level1_pred | lgghgg_pred | who_grade_pred |
+| :--- | :--- | :--- | :--- |
+| U0027924 | 3 | 0 | 0 |
+| U0808219 | 2 | 0 | 1 |
+| ... | ... | ... | ... |
+</div>
+
+### Outputs
+
+Results are saved in a JSON file to the path provided in `--output_json`.
 
 ```json
 // results.json 
@@ -96,18 +112,6 @@ Results are saved in a structured JSON file to the path provided in `--output_js
 }
 ```
 
-
-
-The submission file provided via `--submission_csv` must be a CSV with one row per subject, see `eval/example_submission.csv` for an example.
-
-| Column | Type | Description | Expected Range | Example |
-|------|------|-------------|---------------|--------|
-| `subject_id` | string | Unique subject identifier | Any valid subject ID present in the reference CSV | `U0027924` |
-| `level1_pred` | integer | Predicted Level-1 tumor class label | 0–3 | `3` |
-| `lgghgg_pred` | integer | Predicted LGG/HGG label | 0–1 | `0` |
-| `who_grade_pred` | integer | Predicted WHO grade label | 0–2 | `2` |
-
- 
 
 
 
