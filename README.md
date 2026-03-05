@@ -40,7 +40,8 @@ Juampablo E. Heras Rivera†, Daniel K Low†, Wen-wai Yim, Jacob Ruzevick, Xavi
 
 ![-----------------------------------------------------](assets/purpleline.png)
 
-## Evaluation
+
+<h2 align="center">Evaluation</h2>
 
 To evaluate model predictions, we use:
 
@@ -54,6 +55,48 @@ python3 eval/evaluate_predictions.py \
 ```
 
 
+Results are saved in a structured JSON file to the path provided in `--output_json`:
+
+```json
+// results.json 
+{
+  "runs": {
+    "test": {
+      "tasks": {
+        "level1": {
+          "summary": { "num_samples": "..." },
+          "global_metrics": {
+            "accuracy": "...",
+            "balanced_accuracy": "...",
+            "f1_macro": "...",
+            "f1_weighted": "...",
+            "precision_macro": "...",
+            "recall_macro": "..."
+          },
+          "per_class_metrics": {
+            "0": { "support": "...", "fraction": "...", "precision": "...", "recall": "...", "f1": "..." },
+            "1": { "support": "...", "fraction": "...", "precision": "...", "recall": "...", "f1": "..." },
+            "2": { "..." : "..." }
+          },
+          "confusion_matrix": {
+            "labels": [0, 1, "..."],
+            "matrix": [
+              [30, 29, "..."],
+              ["...", "...", "..."]
+            ]
+          },
+          "task": "level1",
+          "run_id": "test"
+        },
+        "lgghgg": { "..." : "Follows level1 structure" },
+        "who":    { "..." : "Follows level1 structure" }
+      }
+    }
+  }
+}
+```
+
+
 
 The submission file provided via `--submission_csv` must be a CSV with one row per subject, see `eval/example_submission.csv` for an example.
 
@@ -64,23 +107,8 @@ The submission file provided via `--submission_csv` must be a CSV with one row p
 | `lgghgg_pred` | integer | Predicted LGG/HGG label | 0–1 | `0` |
 | `who_grade_pred` | integer | Predicted WHO grade label | 0–2 | `2` |
 
+ 
 
-
-If `--output_json` is provided, results are saved in a structured JSON file:
-
-```json
-{
-  "runs": {
-    "my_run": {
-      "tasks": {
-        "level1": {...},
-        "lgghgg": {...},
-        "who": {...}
-      }
-    }
-  }
-}
-```
 
 
 ![-----------------------------------------------------](assets/purpleline.png)
