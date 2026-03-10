@@ -182,7 +182,14 @@ Results are saved in a JSON file to the path provided in `--output_json`.
     
     @inproceedings{CoRe-BT-arXiv,
     
-    author       = {Juampablo E. Heras Rivera, Daniel K. Low, Xavier Xiong, Jacob J. Ruzevick, Daniel D. Child, Wen-wai Yim, Mehmet Kurt, Asma {Ben Abacha}}, 
+    author       = {Juampablo E. Heras Rivera and 
+                    Daniel K. Low and 
+                    Xavier Xiong and 
+                    Jacob J. Ruzevick and 
+                    Daniel D. Child and 
+                    Wen-wai Yim and 
+                    Mehmet Kurt and 
+                    Asma {Ben Abacha}}, 
     
     title        = {CoRe-BT: A Multimodal Radiology-Pathology-Text Benchmark for Robust Brain Tumor Typing}, 
     
