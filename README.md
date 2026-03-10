@@ -203,7 +203,7 @@ Results are saved in a JSON file to the path provided in `--output_json`.
     
     @inproceedings{CoRe-BT-arXiv,
     
-    author       = {Juampablo E. Heras Rivera and 
+    author       = {Juampablo E. {Heras Rivera} and 
                     Daniel K. Low and 
                     Xavier Xiong and 
                     Jacob J. Ruzevick and 
