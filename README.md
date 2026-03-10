@@ -2,8 +2,8 @@
 <p align="center">
     <a href="https://www.imageclef.org/2026/medical/mediqa-core">Challenge Description</a> |
     <a href="https://ai4media-bench.aimultimedialab.ro/competitions/6/">Registration</a> |
-    <a href="https://arxiv.org/pdf/2603.03618">Manuscript</a>
-    <!-- <a href="#bibtex">BibTeX</a> | -->
+    <a href="https://arxiv.org/pdf/2603.03618">Manuscript</a> |
+    <a href="#citation">BibTeX</a>
     
 </p>
 
@@ -44,6 +44,28 @@ Juampablo E. Heras Rivera†, Daniel K Low†, Wen-wai Yim, Jacob Ruzevick, Xavi
 ![-----------------------------------------------------](assets/purpleline.png)
 
 
+<h2 align="center">Benchmark Overview</h2>
+
+### Data
+
+| Component | Count | Description |
+|-----------|------:|-------------|
+| Patients | 310 | Glioma patients collected at the University of Washington (2023–2025) |
+| MRI volumes | 310 subjects | Multi-sequence brain MRI: T1, T1c, T2, FLAIR |
+| Histopathology subjects | 95 | Patients with paired H&E whole-slide pathology images |
+| Whole-slide images (WSI) | 597 slides | Gigapixel histopathology slides (~5 per subject on average) |
+| Pathology reports | 95 | Free-text neuropathology diagnostic reports |
+| Tumor masks | subset of MRI cases | Expert-corrected segmentation masks for edema, enhancing tumor, and necrotic core |
+
+### Benchmark Tasks
+
+| Task | Prediction Target | Classes | Description |
+|-----|------------------|--------:|-------------|
+| WHO Grade Prediction | WHO tumor grade | 3 | Predict WHO Grade II, III, or IV |
+| LGG vs HGG Classification | Tumor grade group | 2 | Binary classification of low-grade versus high-grade glioma |
+| Molecular Tumor Type (Level-1) | Molecular tumor grouping | 4 | Coarse tumor categories reflecting biologically meaningful molecular subtypes |
+
+![-----------------------------------------------------](assets/purpleline.png)
 
 
 <h2 align="center">Repo Structure</h2>
@@ -177,8 +199,7 @@ Results are saved in a JSON file to the path provided in `--output_json`.
 ```
 
 
-<h2 align="center">Citation</h2>
-
+<h2 id="citation" align="center">Citation</h2>
     
     @inproceedings{CoRe-BT-arXiv,
     
