@@ -19,48 +19,10 @@ from sklearn.metrics import roc_auc_score, average_precision_score, f1_score, pr
 from collections import defaultdict
 
 
-'''
-================================================================================
-Validation Results
-================================================================================
-Samples: 21
-Average Loss: 1.3282
-Accuracy: 0.5714
-Balanced Accuracy: 0.2308
-F1 (macro): 0.1875
-F1 (weighted): 0.4643
-Precision (macro): 0.1579
-Recall (macro): 0.2308
-AUROC (macro): 0.8250
-AUPRC (macro): 0.6678
-
-Per-Class Metrics
---------------------------------------------------------------------------------
-Class | Support | Fraction | Precision | Recall | F1
---------------------------------------------------------------------------------
-    0 |       1 | 1/21 (  4.8%) |     0.000 |  0.000 | 0.000
-    1 |       3 | 3/21 ( 14.3%) |     0.000 |  0.000 | 0.000
-    2 |       4 | 4/21 ( 19.0%) |     0.000 |  0.000 | 0.000
-    3 |      13 | 13/21 ( 61.9%) |     0.632 |  0.923 | 0.750
-
-Confusion Matrix
---------------------------------------------------------------------------------
-[[ 0  0  0  1]
- [ 0  0  1  2]
- [ 0  0  0  4]
- [ 0  1  0 12]]
-================================================================================
-
-Test Accuracy: 0.5714285714285714 f1: 0.4642857142857143 Precision: 0.15789473684210525 Recall: 0.23076923076923078 AUROC: 0.824995810289928 AUPRC: 0.6678127170387231
-
-'''
-
 
 def seed_torch(device, seed=7):
-    # ------------------------------------------------------------------------------------------
     # References:
     # HIPT: https://github.com/mahmoodlab/HIPT/blob/master/2-Weakly-Supervised-Subtyping/main.py
-    # ------------------------------------------------------------------------------------------
     import random
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
@@ -201,7 +163,7 @@ def train(model,
         # Print the loss
         if (i + 1) % eval_interval == 0 or (i + 1) == train_iters:
             print(f'Start evaluating ...')
-            results = evaluate(model, criterion, test_loader, device)
+            results = evaluate(model, criterion, val_loader, device)
 
             accuracy = results["global_metrics"]["accuracy"]
             f1 = results["global_metrics"]["f1_weighted"]
@@ -268,17 +230,6 @@ def train(model,
     with open(json_path, "w") as f:
         json.dump(all_results, f, indent=4)
     
-    # writer.add_scalar('Test Accuracy', accuracy, i)
-    # writer.add_scalar('Test f1', f1, i)
-    # writer.add_scalar('Test AUROC', auroc, i)
-    # writer.add_scalar('Test AUPRC', auprc, i)
-    # writer.add_scalar('Test Precision', precision, i)
-    # writer.add_scalar('Test Recall', recall, i)
-
-    # f = open(f'{output_dir}/results.txt', 'w')
-    # f.write(f'Val f1: {val_f1}\n')
-    # f.write(f'Test f1: {f1} Test AUROC: {auroc} Test AUPRC: {auprc}\n')
-    # f.close()
 
 
 def evaluate(model, criterion, val_loader, device):
@@ -307,9 +258,8 @@ def evaluate(model, criterion, val_loader, device):
     total_samples = len(target_gather)
     avg_loss = total_loss / len(val_loader)
 
-    # -----------------------
+    
     # Global Metrics
-    # -----------------------
     accuracy = float((preds == target_gather).mean())
     f1_weighted = float(f1_score(target_gather, preds, average="weighted"))
     f1_macro = float(f1_score(target_gather, preds, average="macro"))
@@ -322,9 +272,8 @@ def evaluate(model, criterion, val_loader, device):
         recall_score(target_gather, preds, average="macro", zero_division=0)
     )
 
-    # -----------------------
+    
     # Per-class metrics
-    # -----------------------
     labels = np.unique(target_gather)
 
     precision_c, recall_c, f1_c, support_c = precision_recall_fscore_support(
@@ -342,9 +291,9 @@ def evaluate(model, criterion, val_loader, device):
             "f1": float(f1_c[i]),
         }
 
-    # -----------------------
+    
     # AUROC / AUPRC
-    # -----------------------
+    
     present = np.unique(target_gather.astype(int))
 
     if present.size < 2:
@@ -362,14 +311,12 @@ def evaluate(model, criterion, val_loader, device):
             average_precision_score(y_1h, p, average="macro")
         )
 
-    # -----------------------
+    
     # Confusion Matrix
-    # -----------------------
     cm = confusion_matrix(target_gather, preds, labels=labels)
 
-    # -----------------------
+    
     # Assemble structured results
-    # -----------------------
     results = {
         "summary": {
             "num_samples": int(total_samples),
@@ -393,118 +340,6 @@ def evaluate(model, criterion, val_loader, device):
     }
 
     return results
-
-# def evaluate(model, criterion, val_loader, device):
-#     model.eval()
-
-#     total_loss = 0
-#     pred_gather, target_gather = [], []
-
-#     with torch.no_grad():
-#         for embed, target in val_loader:
-
-#             embed = embed.to(device)
-#             target = target.to(device)
-
-#             output = model(embed)
-#             loss = criterion(output, target)
-#             total_loss += loss.item()
-
-#             pred_gather.append(output.cpu().numpy())
-#             target_gather.append(target.cpu().numpy())
-
-#     pred_gather = np.concatenate(pred_gather)
-#     target_gather = np.concatenate(target_gather)
-
-#     preds = pred_gather.argmax(1)
-
-#     # -----------------------
-#     # Global Metrics
-#     # -----------------------
-#     accuracy = (preds == target_gather).mean()
-#     f1_weighted = f1_score(target_gather, preds, average="weighted")
-#     f1_macro = f1_score(target_gather, preds, average="macro")
-#     precision_macro, recall_macro, _, _ = precision_recall_fscore_support(
-#         target_gather, preds, average="macro", zero_division=0
-#     )
-
-#     balanced_acc = recall_score(target_gather, preds, average="macro", zero_division=0)
-
-#     avg_loss = total_loss / len(val_loader)
-
-#     # -----------------------
-#     # Per-class metrics
-#     # -----------------------
-#     labels = np.unique(target_gather)
-#     precision_c, recall_c, f1_c, support_c = precision_recall_fscore_support(
-#         target_gather, preds, labels=labels, zero_division=0
-#     )
-
-#     total_samples = len(target_gather)
-
-#     # -----------------------
-#     # AUROC / AUPRC
-#     # -----------------------
-#     present = np.unique(target_gather.astype(int))
-
-#     if present.size < 2:
-#         auroc = float("nan")
-#         auprc = float("nan")
-#     else:
-#         y_1h = to_onehot(target_gather, pred_gather.shape[1])
-#         y_1h = y_1h[:, present]
-#         p = pred_gather[:, present]
-
-#         auroc = roc_auc_score(y_1h, p, average="macro", multi_class="ovr")
-#         auprc = average_precision_score(y_1h, p, average="macro")
-
-#     # -----------------------
-#     # Printing
-#     # -----------------------
-#     print("\n" + "="*80)
-#     print("Validation Results")
-#     print("="*80)
-
-#     print(f"Samples: {total_samples}")
-#     print(f"Average Loss: {avg_loss:.4f}")
-#     print(f"Accuracy: {accuracy:.4f}")
-#     print(f"Balanced Accuracy: {balanced_acc:.4f}")
-#     print(f"F1 (macro): {f1_macro:.4f}")
-#     print(f"F1 (weighted): {f1_weighted:.4f}")
-#     print(f"Precision (macro): {precision_macro:.4f}")
-#     print(f"Recall (macro): {recall_macro:.4f}")
-#     print(f"AUROC (macro): {auroc:.4f}")
-#     print(f"AUPRC (macro): {auprc:.4f}")
-
-#     print("\nPer-Class Metrics")
-#     print("-"*80)
-#     print("Class | Support | Fraction | Precision | Recall | F1")
-#     print("-"*80)
-
-#     for i, cls in enumerate(labels):
-#         frac = support_c[i] / total_samples
-#         print(
-#             f"{cls:5d} | "
-#             f"{support_c[i]:7d} | "
-#             f"{support_c[i]}/{total_samples} ({frac*100:5.1f}%) | "
-#             f"{precision_c[i]:9.3f} | "
-#             f"{recall_c[i]:6.3f} | "
-#             f"{f1_c[i]:5.3f}"
-#         )
-
-#     # -----------------------
-#     # Confusion Matrix
-#     # -----------------------
-#     cm = confusion_matrix(target_gather, preds, labels=labels)
-
-#     print("\nConfusion Matrix")
-#     print("-"*80)
-#     print(cm)
-
-#     print("="*80 + "\n")
-
-#     return accuracy, f1_weighted, precision_macro, recall_macro, auroc, auprc
-
 
 
 def main():
@@ -536,7 +371,6 @@ def main():
     train(model, train_loader, val_loader, test_loader, **vars(args))
 
 
-# Test Accuracy: 0.7222222222222222 f1: 0.7355555555555555 Precision: 0.5277777777777778 Recall: 0.5598290598290597 AUROC: 0.7026709401709401 AUPRC: 0.4909390467082775
 class LinearProbe(nn.Module):
     def __init__(self, embed_dim: int = 768, num_classes: int = 10):
         super().__init__()
@@ -546,18 +380,6 @@ class LinearProbe(nn.Module):
     def forward(self, x):
         x = self.ln(x)
         return self.fc(x)
-
-    
-# Test Accuracy: 0.7222222222222222 f1: 0.7355555555555555 Precision: 0.5277777777777778 Recall: 0.5598290598290597 AUROC: 0.6922542735042735 AUPRC: 0.4770501578193886
-# class LinearProbe(nn.Module):
-
-#     def __init__(self, embed_dim: int = 1536, num_classes: int = 10):
-#         super(LinearProbe, self).__init__()
-
-#         self.fc = nn.Linear(embed_dim, num_classes)
-
-#     def forward(self, x):
-#         return self.fc(x)
 
 
 class EmbeddingDataset(Dataset):
@@ -570,11 +392,6 @@ class EmbeddingDataset(Dataset):
         """
         df = pd.read_csv(dataset_csv)
         split_df = df[df['split'] == split]
-
-
-        # self.samples = split_df['slide_id'].tolist()
-        # # self.samples = split_df['input'].tolist()
-        # self.labels = split_df['label'].tolist()
 
 
         # Remove rows with NaN labels
@@ -639,8 +456,6 @@ class EmbeddingDataset(Dataset):
 class ProcessorSubject:
 
     def __init__(self, aggregation="mean"):
-        # mean: Test Accuracy: 0.7857142857142857 f1: 0.6914285714285714 Precision: 0.39285714285714285 Recall: 0.5 AUROC: 0.7575757575757576 AUPRC: 0.7143562245834973
-        # median: Test Accuracy: 0.7857142857142857 f1: 0.6914285714285714 Precision: 0.39285714285714285 Recall: 0.5 AUROC: 0.6818181818181819 AUPRC: 0.631065651520197
         assert aggregation in ["mean", "median"]
         self.aggregation = aggregation
 

@@ -7,10 +7,8 @@ OUTPUT_CSV = os.path.join(ROOT_DIR, "aggregated_results.csv")
 
 rows = []
 
-# -------------------------------------------------
-# Walk experiment folders
-# -------------------------------------------------
 
+# Walk experiment folders
 for root, dirs, files in os.walk(ROOT_DIR):
 
     if "summary.json" not in files:
@@ -22,9 +20,8 @@ for root, dirs, files in os.walk(ROOT_DIR):
     with open(summary_path, "r") as f:
         data = json.load(f)
 
-    # -------------------------------------------------
-    # 1️⃣ MRI-only training
-    # -------------------------------------------------
+    
+    # MRI-only training
 
     if "mri_only" in data:
         for run in data["mri_only"]:
@@ -46,10 +43,8 @@ for root, dirs, files in os.walk(ROOT_DIR):
                 "val_f1": run.get("val_f1"),
             })
 
-    # -------------------------------------------------
-    # 2️⃣ Pathology-only training
-    # -------------------------------------------------
-
+    
+    # Pathology-only training
     if "histo_only" in data:
         for run in data["histo_only"]:
 
@@ -70,9 +65,8 @@ for root, dirs, files in os.walk(ROOT_DIR):
                 "val_f1": run.get("val_f1"),
             })
 
-    # -------------------------------------------------
-    # 3️⃣ Fusion training + ablations
-    # -------------------------------------------------
+    
+    # Fusion training + ablations
 
     if "fusion_mri_histo" in data:
 
@@ -111,9 +105,9 @@ for root, dirs, files in os.walk(ROOT_DIR):
                     "val_f1": run.get("val_f1"),
                 })
 
-# -------------------------------------------------
+
 # Build DataFrame
-# -------------------------------------------------
+
 
 df = pd.DataFrame(rows)
 
@@ -149,26 +143,13 @@ print(f"\nSaved aggregated CSV to:\n{OUTPUT_CSV}")
 
 import numpy as np
 
-# -------------------------------------------------
-# Select metrics we want in table
-# -------------------------------------------------
 
-# metrics = [
-#     ("accuracy", "Accuracy"),
-#     ("balanced_accuracy", "Macro Acc."),
-#     ("precision_macro", "Precision (Macro)"),
-#     ("recall_macro", "Recall (Macro)"),
-#     ("f1_macro", "F1 (Macro)"),
-# ]
 metrics = [
     ("balanced_accuracy", "Accuracy (Macro)"),
     ("precision_macro", "Precision (Macro)"),
     ("recall_macro", "Recall (Macro)"),
     ("f1_macro", "F1 (Macro)"),
 ]
-# -------------------------------------------------
-# Compute mean ± std per experiment/model
-# -------------------------------------------------
 
 grouped = (
     df.groupby(["experiment", "model"])
@@ -179,10 +160,8 @@ grouped = (
 grouped.columns = ["_".join(col) for col in grouped.columns]
 grouped = grouped.reset_index()
 
-# -------------------------------------------------
-# Generate LaTeX
-# -------------------------------------------------
 
+# Generate LaTeX
 for experiment in grouped["experiment"].unique():
 
     print("\n" + r"%% " + "="*70)

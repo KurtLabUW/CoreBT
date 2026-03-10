@@ -18,504 +18,14 @@ import json
 from collections import defaultdict
 
 
-from models import MultimodalClassifier, LinearProbe#, #ResidualFusionClassifier
+from models import RobustGatedFusion
 import plotext as plt
-
-'''
-================================================================================
-Validation Results
-================================================================================
-Samples: 69
-Average Loss: 1.5381
-Accuracy: 0.6377
-Balanced Accuracy: 0.5708
-F1 (macro): 0.5188
-F1 (weighted): 0.6519
-Precision (macro): 0.4921
-Recall (macro): 0.5708
-AUROC (macro): 0.7296
-AUPRC (macro): 0.5477
-
-Per-Class Metrics
---------------------------------------------------------------------------------
-Class | Support | Fraction | Precision | Recall | F1
---------------------------------------------------------------------------------
-    0 |       4 | 4/69 (  5.8%) |     0.500 |  0.750 | 0.600
-    1 |      10 | 10/69 ( 14.5%) |     0.400 |  0.600 | 0.480
-    2 |      10 | 10/69 ( 14.5%) |     0.200 |  0.200 | 0.200
-    3 |      45 | 45/69 ( 65.2%) |     0.868 |  0.733 | 0.795
-
-Confusion Matrix
---------------------------------------------------------------------------------
-[[ 3  0  1  0]
- [ 2  6  2  0]
- [ 0  3  2  5]
- [ 1  6  5 33]]
-================================================================================
-
-Test Accuracy: 0.6376811594202898 f1: 0.6519294569582679 Precision: 0.49210526315789477 Recall: 0.5708333333333333 AUROC: 0.7296410980733015 AUPRC: 0.5476586505468377
-
-
-
-'''
-
-# import torch
-# import torch.nn as nn
-# import torch.nn.functional as F
-
-# class GatedResidualFusion(nn.Module):
-#     def __init__(self, mri_probe_path, histo_probe_path,
-#                  residual_hidden=64, freeze_probes=True, device="cuda"):
-#         super().__init__()
-
-#         # --- Load Probes (Keep your existing logic) ---
-#         mri_state = torch.load(mri_probe_path, map_location=device)
-#         num_classes = mri_state["fc.bias"].shape[0]
-#         in_dim_mri = mri_state["fc.weight"].shape[1]
-#         self.mri_probe = nn.Linear(in_dim_mri, num_classes)
-#         self.mri_probe.weight.data.copy_(mri_state["fc.weight"])
-#         self.mri_probe.bias.data.copy_(mri_state["fc.bias"])
-
-#         histo_state = torch.load(histo_probe_path, map_location=device)
-#         in_dim_histo = histo_state["fc.weight"].shape[1]
-#         self.histo_probe = nn.Linear(in_dim_histo, num_classes)
-#         self.histo_probe.weight.data.copy_(histo_state["fc.weight"])
-#         self.histo_probe.bias.data.copy_(histo_state["fc.bias"])
-
-#         if freeze_probes:
-#             for p in self.parameters(): p.requires_grad = False
-
-#         # --- 1. Learnable Modality Gating ---
-#         # Instead of simple alpha/beta, we use a gate that sums to 1.0
-#         # This prevents the model from "blowing up" logits.
-#         self.modality_gate = nn.Parameter(torch.tensor([0.0, 0.0])) # Softmaxed to [0.5, 0.5]
-
-#         # --- 2. Gated Residual Delta ---
-#         # We add a gate to the residual itself, initialized at zero.
-#         # This ensures that at Epoch 0, the model IS exactly the unimodal average.
-#         self.residual_gate = nn.Parameter(torch.tensor(0.0))
-
-#         self.residual_net = nn.Sequential(
-#             nn.Linear(in_dim_mri + in_dim_histo, residual_hidden),
-#             nn.LayerNorm(residual_hidden),
-#             nn.GELU(),
-#             nn.Dropout(0.3),
-#             nn.Linear(residual_hidden, num_classes)
-#         )
-
-#     def forward(self, embed_mri, embed_histo, mask):
-#         # Unimodal Logits
-#         logits_mri = self.mri_probe(embed_mri)
-#         logits_histo = self.histo_probe(embed_histo)
-
-#         # Handle Missing Modalities
-#         mri_mask = mask[:, 0].unsqueeze(1)    # [B, 1]
-#         histo_mask = mask[:, 1].unsqueeze(1)  # [B, 1]
-
-#         # Apply Modality Gating (Softmax ensures weights sum to 1)
-#         weights = F.softmax(self.modality_gate, dim=0)
-        
-#         # Weighted Average (Base)
-#         # We use the mask to zero out missing data and adjust weights
-#         mri_part = weights[0] * logits_mri * mri_mask
-#         histo_part = weights[1] * logits_histo * histo_mask
-        
-#         # Normalize by active masks to avoid diluting logits when a modality is missing
-#         denom = torch.clamp(mri_mask + histo_mask, min=1e-6)
-#         base_logits = (mri_part + histo_part) / ( (weights[0]*mri_mask + weights[1]*histo_mask) + 1e-6 )
-
-#         # --- 3. Residual Feature Fusion ---
-#         # Concatenate RAW embeddings for the residual, not just logits. 
-#         # Logits lose too much info for the residual to be helpful.
-#         feat_fusion = torch.cat([embed_mri * mri_mask, embed_histo * histo_mask], dim=1)
-#         delta = self.residual_net(feat_fusion)
-
-#         # Apply Residual Gate (sigmoid keeps it between 0 and 1)
-#         # This allows the model to learn HOW MUCH to trust the residual.
-#         res_weight = torch.sigmoid(self.residual_gate)
-        
-#         return base_logits + (res_weight * delta)
-
-class ResidualFusionClassifier(nn.Module):
-    def __init__(self, mri_probe_path, histo_probe_path,
-                 residual_hidden=32, freeze_probes=True, device="cuda"):
-
-        super().__init__()
-
-        # Load MRI probe
-        mri_state = torch.load(mri_probe_path, map_location=device)
-        num_classes = mri_state["fc.bias"].shape[0]
-        in_dim_mri = mri_state["fc.weight"].shape[1]
-
-        self.mri_probe = nn.Linear(in_dim_mri, num_classes)
-        self.mri_probe.weight.data = mri_state["fc.weight"]
-        self.mri_probe.bias.data = mri_state["fc.bias"]
-
-        # Load Histo probe
-        histo_state = torch.load(histo_probe_path, map_location=device)
-        in_dim_histo = histo_state["fc.weight"].shape[1]
-
-        self.histo_probe = nn.Linear(in_dim_histo, num_classes)
-        self.histo_probe.weight.data = histo_state["fc.weight"]
-        self.histo_probe.bias.data = histo_state["fc.bias"]
-
-        if freeze_probes:
-            for p in self.mri_probe.parameters():
-                p.requires_grad = False
-            for p in self.histo_probe.parameters():
-                p.requires_grad = False
-
-        # self.alpha = nn.Parameter(torch.tensor(1.0))
-        # self.beta = nn.Parameter(torch.tensor(1.0))        
-        self.alpha = nn.Parameter(torch.tensor(0.5))
-        self.beta = nn.Parameter(torch.tensor(0.5))
-
-        self.residual = nn.Sequential(
-            nn.Linear(2 * num_classes, residual_hidden),
-            nn.GELU(),
-            nn.Dropout(0.2),
-            nn.Linear(residual_hidden, num_classes)
-        )
-
-    def forward(self, embed_mri, embed_histo, mask):
-
-        logits_mri = self.mri_probe(embed_mri)
-        logits_histo = self.histo_probe(embed_histo)
-
-        mri_mask = mask[:, 0].unsqueeze(1)
-        histo_mask = mask[:, 1].unsqueeze(1)
-
-        logits_mri = logits_mri * mri_mask
-        logits_histo = logits_histo * histo_mask
-
-        denom = torch.clamp(mri_mask + histo_mask, min=1.0)
-
-        base = (self.alpha * logits_mri +
-                self.beta * logits_histo) / denom
-
-        delta = self.residual(torch.cat([logits_mri, logits_histo], dim=1))
-
-        return base + delta
-
-
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class AdditiveGatedFusion(nn.Module):
-    def __init__(self, mri_probe_path, histo_probe_path, 
-                 bottleneck_dim=16, freeze_probes=True, device="cuda"):
-        super().__init__()
-
-        # --- 1. Load Probes (Fixed Anchors) ---
-        mri_state = torch.load(mri_probe_path, map_location=device)
-        num_classes = mri_state["fc.bias"].shape[0]
-        in_dim_mri = mri_state["fc.weight"].shape[1]
-        
-        self.mri_probe = nn.Linear(in_dim_mri, num_classes)
-        self.mri_probe.load_state_dict({"weight": mri_state["fc.weight"], "bias": mri_state["fc.bias"]})
-
-        histo_state = torch.load(histo_probe_path, map_location=device)
-        in_dim_histo = histo_state["fc.weight"].shape[1]
-        
-        self.histo_probe = nn.Linear(in_dim_histo, num_classes)
-        self.histo_probe.load_state_dict({"weight": histo_state["fc.weight"], "bias": histo_state["fc.bias"]})
-
-        if freeze_probes:
-            for p in self.parameters(): p.requires_grad = False
-
-        # --- 2. Minimalist Residual Path ---
-        # Using a very small bottleneck (16) to prevent memorization
-        self.mri_proj = nn.Linear(in_dim_mri, bottleneck_dim)
-        self.histo_proj = nn.Linear(in_dim_histo, bottleneck_dim)
-        
-        self.residual_net = nn.Sequential(
-            nn.BatchNorm1d(bottleneck_dim * 2),
-            nn.Dropout(0.5), # High dropout for small data
-            nn.Linear(bottleneck_dim * 2, num_classes)
-        )
-
-        # Initialize the residual scale to almost zero
-        # This ensures Epoch 1 is nearly identical to the "added" probes
-        self.res_scale = nn.Parameter(torch.tensor([0.01]))
-
-    def forward(self, embed_mri, embed_histo, mask):
-        mri_mask = mask[:, 0].unsqueeze(1)
-        histo_mask = mask[:, 1].unsqueeze(1)
-
-        # --- 3. Simple Additive Logic ---
-        # We just add the logits. We divide by 2 only if both are present 
-        # to keep the logit scale consistent.
-        logits_mri = self.mri_probe(embed_mri) * mri_mask
-        logits_histo = self.histo_probe(embed_histo) * histo_mask
-        
-        # Simple mean of available probes
-        count = torch.clamp(mri_mask + histo_mask, min=1e-6)
-        base_logits = (logits_mri + logits_histo) / count
-
-        # --- 4. Tiny Residual Correction ---
-        mri_low = self.mri_proj(embed_mri) * mri_mask
-        histo_low = self.histo_proj(embed_histo) * histo_mask
-        
-        feat_fusion = torch.cat([mri_low, histo_low], dim=1)
-        delta = self.residual_net(feat_fusion)
-
-        # Final Output: Base + (Small Scale * Delta)
-        return base_logits + (self.res_scale * delta)
-
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class LatentAdditiveFusion(nn.Module):
-    def __init__(self, mri_probe_path, histo_probe_path, 
-                 latent_dim=16, device="cuda"):
-        super().__init__()
-
-        # --- 1. Load Probes (Anchors) ---
-        mri_state = torch.load(mri_probe_path, map_location=device)
-        num_classes = mri_state["fc.bias"].shape[0]
-        in_dim_mri = mri_state["fc.weight"].shape[1]
-        
-        self.mri_probe = nn.Linear(in_dim_mri, num_classes)
-        self.mri_probe.load_state_dict({"weight": mri_state["fc.weight"], "bias": mri_state["fc.bias"]})
-
-        histo_state = torch.load(histo_probe_path, map_location=device)
-        in_dim_histo = histo_state["fc.weight"].shape[1]
-        
-        self.histo_probe = nn.Linear(in_dim_histo, num_classes)
-        self.histo_probe.load_state_dict({"weight": histo_state["fc.weight"], "bias": histo_state["fc.bias"]})
-
-        # Freeze them to keep that high starting F1
-        for p in self.parameters(): p.requires_grad = False
-
-        # --- 2. Shared Latent Bottleneck ---
-        # Instead of separate nets, we project both into a shared space
-        # This forces the model to find common ground.
-        self.shared_proj = nn.Sequential(
-            nn.Linear(in_dim_mri + in_dim_histo, latent_dim),
-            nn.LayerNorm(latent_dim),
-            nn.GELU()
-        )
-
-        # --- 3. Dynamic Residual Scaling ---
-        # Instead of a single scale, we learn a small vector to adjust the logic
-        self.residual_head = nn.Sequential(
-            nn.Dropout(0.5),
-            nn.Linear(latent_dim, num_classes)
-        )
-        
-        # Initialize at near-zero
-        self.res_gate = nn.Parameter(torch.tensor(-4.0))
-
-    def forward(self, embed_mri, embed_histo, mask):
-        mri_mask = mask[:, 0].unsqueeze(1)
-        histo_mask = mask[:, 1].unsqueeze(1)
-
-        # Base Predictions (Safe)
-        l_mri = self.mri_probe(embed_mri) * mri_mask
-        l_histo = self.histo_probe(embed_histo) * histo_mask
-        
-        # Simple weighted sum (starts as pure average)
-        base_logits = (l_mri + l_histo) / (mri_mask + histo_mask + 1e-8)
-
-        # --- 4. Shared Interaction ---
-        # Zero-pad missing modalities before concat
-        m_feat = embed_mri * mri_mask
-        h_feat = embed_histo * histo_mask
-        
-        combined = torch.cat([m_feat, h_feat], dim=1)
-        latent_features = self.shared_proj(combined)
-        
-        # Calculate Delta
-        delta = self.residual_head(latent_features)
-        
-        # Apply gate
-        gate = torch.sigmoid(self.res_gate)
-        return base_logits + (gate * delta)
-
-
-
-
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class GatedResidualFusion(nn.Module):
-    def __init__(self, mri_probe_path, histo_probe_path,
-                 residual_hidden=32, freeze_probes=True, device="cuda"):
-        super().__init__()
-
-        # --- Load Probes (Stable Baseline) ---
-        mri_state = torch.load(mri_probe_path, map_location=device)
-        num_classes = mri_state["fc.bias"].shape[0]
-        in_dim_mri = mri_state["fc.weight"].shape[1]
-        self.mri_probe = nn.Linear(in_dim_mri, num_classes)
-        self.mri_probe.load_state_dict({"weight": mri_state["fc.weight"], "bias": mri_state["fc.bias"]})
-
-        histo_state = torch.load(histo_probe_path, map_location=device)
-        in_dim_histo = histo_state["fc.weight"].shape[1]
-        self.histo_probe = nn.Linear(in_dim_histo, num_classes)
-        self.histo_probe.load_state_dict({"weight": histo_state["fc.weight"], "bias": histo_state["fc.bias"]})
-
-        if freeze_probes:
-            for p in self.mri_probe.parameters(): p.requires_grad = False
-            for p in self.histo_probe.parameters(): p.requires_grad = False
-
-        # --- 1. Learnable Modality Gating (Fixed) ---
-        # Initializing at [0, 0] ensures 50/50 split at start.
-        self.modality_gate = nn.Parameter(torch.tensor([0.0, 0.0])) 
-
-        # --- 2. Shared Latent Bottleneck ---
-        # We project into a very small latent space (e.g., 16 or 32).
-        # This prevents the model from memorizing simple cases.
-        self.shared_proj = nn.Sequential(
-            nn.Linear(in_dim_mri + in_dim_histo, residual_hidden),
-            nn.LayerNorm(residual_hidden),
-            nn.GELU(),
-            nn.Dropout(0.5) 
-        )
-
-        self.residual_head = nn.Linear(residual_hidden, num_classes)
-
-        # --- 3. Initial Near-Zero Gate ---
-        # Setting to -4.0 makes the sigmoid output ~0.018.
-        # This forces the model to start as a pure "Simple" additive model.
-        self.residual_gate = nn.Parameter(torch.tensor(-4.0))
-
-    def forward(self, embed_mri, embed_histo, mask):
-        mri_mask = mask[:, 0].unsqueeze(1)    # [B, 1]
-        histo_mask = mask[:, 1].unsqueeze(1)  # [B, 1]
-
-        # 1. Base Unimodal Logits
-        logits_mri = self.mri_probe(embed_mri)
-        logits_histo = self.histo_probe(embed_histo)
-
-        # 2. Weighted Average Base
-        weights = F.softmax(self.modality_gate, dim=0)
-        
-        # We calculate the weighted sum of available modalities
-        mri_part = weights[0] * logits_mri * mri_mask
-        histo_part = weights[1] * logits_histo * histo_mask
-        
-        # The denominator ensures that if one modality is missing, the other 
-        # takes 100% of the weight, rather than being "diluted" by a 0.5 factor.
-        denom = (weights[0] * mri_mask + weights[1] * histo_mask) + 1e-8
-        base_logits = (mri_part + histo_part) / denom
-
-        # 3. Latent Residual Path
-        # We concatenate raw features and push them through the bottleneck
-        combined_feats = torch.cat([embed_mri * mri_mask, embed_histo * histo_mask], dim=1)
-        latent = self.shared_proj(combined_feats)
-        delta = self.residual_head(latent)
-
-        # 4. Gated Addition
-        res_weight = torch.sigmoid(self.residual_gate)
-        
-        return base_logits + (res_weight * delta)
-
-
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
-class RobustGatedFusion(nn.Module):
-    def __init__(self, mri_probe_path, histo_probe_path, 
-                 residual_hidden=64, freeze_probes=True, device="cuda"):
-        super().__init__()
-
-        # --- 1. Load & Standardize Probes ---
-        # We assume probes are nn.Linear(in_features, num_classes)
-        mri_state = torch.load(mri_probe_path, map_location=device)
-        num_classes = mri_state["fc.bias"].shape[0]
-        in_dim_mri = mri_state["fc.weight"].shape[1]
-        
-        self.mri_probe = nn.Linear(in_dim_mri, num_classes)
-        self.mri_probe.load_state_dict({"weight": mri_state["fc.weight"], "bias": mri_state["fc.bias"]})
-
-        histo_state = torch.load(histo_probe_path, map_location=device)
-        in_dim_histo = histo_state["fc.weight"].shape[1]
-        
-        self.histo_probe = nn.Linear(in_dim_histo, num_classes)
-        self.histo_probe.load_state_dict({"weight": histo_state["fc.weight"], "bias": histo_state["fc.bias"]})
-
-        if freeze_probes:
-            for p in self.mri_probe.parameters(): p.requires_grad = False
-            for p in self.histo_probe.parameters(): p.requires_grad = False
-
-        # --- 2. Input Normalization ---
-        # Probes are often trained on features with specific scales. 
-        # LayerNorm ensures the fusion path sees balanced magnitudes.
-        self.mri_norm = nn.LayerNorm(in_dim_mri)
-        self.histo_norm = nn.LayerNorm(in_dim_histo)
-
-        # --- 3. Instance-Specific Gating ---
-        # Instead of a global weight, the model learns which modality to trust 
-        # based on the specific features of the patient.
-        self.gate_generator = nn.Sequential(
-            nn.Linear(in_dim_mri + in_dim_histo, 16),
-            nn.ReLU(),
-            nn.Linear(16, 2)
-        )
-
-        # --- 4. The Residual Fusion Path ---
-        self.fusion_path = nn.Sequential(
-            nn.Linear(in_dim_mri + in_dim_histo, residual_hidden),
-            nn.LayerNorm(residual_hidden),
-            nn.GELU(),
-            nn.Dropout(0.4),
-            nn.Linear(residual_hidden, num_classes)
-        )
-
-        # --- 5. THE "SAFEGUARD" INITIALIZATION ---
-        # We zero-initialize the final weights and biases of the fusion path.
-        # This ensures that at Epoch 0: Output = Probe_Weights * Probe_Logits + 0
-        nn.init.zeros_(self.fusion_path[-1].weight)
-        nn.init.zeros_(self.fusion_path[-1].bias)
-
-        # Residual strength control (starting near zero)
-        self.res_gate = nn.Parameter(torch.tensor([-4.0]))
-
-    def forward(self, embed_mri, embed_histo, mask):
-        """
-        mask: Tensor of [Batch, 2] where 1 is present, 0 is missing.
-        """
-        mri_mask = mask[:, 0:1]
-        histo_mask = mask[:, 1:2]
-
-        # 1. Get Base Logits from stable probes
-        logits_mri = self.mri_probe(embed_mri)
-        logits_histo = self.histo_probe(embed_histo)
-
-        # 2. Normalize features for the fusion path
-        # We multiply by mask to zero out missing modalities
-        m_feat = self.mri_norm(embed_mri) * mri_mask
-        h_feat = self.histo_norm(embed_histo) * histo_mask
-        combined_feats = torch.cat([m_feat, h_feat], dim=1)
-
-        # 3. Dynamic Modality Weighting (Ensemble)
-        # Compute weights and mask out missing modalities before Softmax
-        gate_logits = self.gate_generator(combined_feats)
-        gate_logits = gate_logits.masked_fill(mask == 0, -1e9)
-        gate_weights = F.softmax(gate_logits, dim=1)
-
-        # Weighted sum of probe outputs
-        base_logits = (gate_weights[:, 0:1] * logits_mri) + \
-                      (gate_weights[:, 1:2] * logits_histo)
-
-        # 4. Residual Correction (The "Bonus" performance)
-        # res_delta is 0 at initialization because of nn.init.zeros_
-        res_delta = self.fusion_path(combined_feats)
-        res_scale = torch.sigmoid(self.res_gate)
-
-        return base_logits + (res_scale * res_delta)
 
 
 def seed_torch(device, seed=7):
-    # ------------------------------------------------------------------------------------------
     # References:
     # HIPT: https://github.com/mahmoodlab/HIPT/blob/master/2-Weakly-Supervised-Subtyping/main.py
-    # ------------------------------------------------------------------------------------------
+
     import random
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
@@ -638,8 +148,6 @@ def train(model,
         target = target.to(device)
 
 
-# Accuracy: 0.7778  F1(w): 0.7863  Precision: 0.6389  Recall: 0.6709  AUROC: 0.8471  AUPRC: 0.7333
-
         output = model(
             embed_mri=embed_mri,
             embed_histo=embed_histo,
@@ -665,9 +173,8 @@ def train(model,
             writer.add_scalar('Train/Loss', loss.item(), i)
             writer.add_scalar('Train/LR', current_lr, i)
 
-        # ==============================
+        
         # Evaluation
-        # ==============================
         if (i + 1) % eval_interval == 0 or (i + 1) == train_iters:
 
             print('Evaluating on validation set...')
@@ -719,9 +226,8 @@ def train(model,
     plt.plot(val_steps, val_f1s)
 
     plt.show()
-    # ======= =======================
+    
     # Load Best or Final
-    # ==============================
     if kwargs.get('model_select') == 'best':
         model.load_state_dict(
             torch.load(os.path.join(output_dir, 'best_model.pth'))
@@ -738,10 +244,7 @@ def train(model,
 
     print('Evaluating on test set (all ablations)...')
 
-    # =====================================================
     # Run All Ablations
-    # =====================================================
-
     eval_configs = {
         "fusion_full": dict(ablate_mri=False, ablate_histo=False),
         "mri_only": dict(ablate_mri=False, ablate_histo=True),
@@ -777,12 +280,6 @@ def train(model,
 
         ablation_results[name] = res
 
-    # =====================================================
-    # Attach metadata
-    # =====================================================
-    # =====================================================
-    # Attach metadata
-    # =====================================================
     final_results = {
         "iteration": i,
         "val_f1": val_f1,
@@ -790,9 +287,6 @@ def train(model,
         "timestamp": pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')
     }
 
-    # =====================================================
-    # JSON logging (Selective Update)
-    # =====================================================
     json_path = os.path.join(output_dir, "results.json")
 
 
@@ -820,38 +314,6 @@ def train(model,
 
 
 
-
-    # final_results = {
-    #     "iteration": i,
-    #     "val_f1": val_f1,
-    #     "test_results": ablation_results
-    # }
-
-    # # =====================================================
-    # # JSON logging
-    # # =====================================================
-
-    # json_path = os.path.join(output_dir, "results.json")
-
-    # if os.path.exists(json_path) and os.path.getsize(json_path) > 0:
-    #     try:
-    #         with open(json_path, "r") as f:
-    #             all_results = json.load(f)
-    #     except json.JSONDecodeError:
-    #         print("Warning: results.json corrupted. Reinitializing.")
-    #         all_results = []
-    # else:
-    #     all_results = []
-
-    # all_results.append(final_results)
-
-    # with open(json_path, "w") as f:
-    #     json.dump(all_results, f, indent=4)
-
-    # print("\nAll ablation results saved.")
-    # print("Training complete.")
-  
-
 def evaluate_ablation(
     model,
     criterion,
@@ -876,10 +338,8 @@ def evaluate_ablation(
             modality_mask = modality_mask.to(device)
             target = target.to(device)
 
-            # -------------------------------------------------
+            
             # Force ablation via mask override
-            # -------------------------------------------------
-
             if ablate_mri:
                 modality_mask[:, 0] = 0.0
 
@@ -899,10 +359,8 @@ def evaluate_ablation(
             pred_gather.append(output.detach().cpu().numpy())
             target_gather.append(target.detach().cpu().numpy())
 
-    # -------------------------------------------------
+    
     # Concatenate
-    # -------------------------------------------------
-
     pred_gather = np.concatenate(pred_gather)
     target_gather = np.concatenate(target_gather)
 
@@ -911,10 +369,8 @@ def evaluate_ablation(
     total_samples = len(target_gather)
     avg_loss = total_loss / len(loader)
 
-    # -------------------------------------------------
+    
     # Global Metrics
-    # -------------------------------------------------
-
     accuracy = float((preds == target_gather).mean())
 
     f1_weighted = float(
@@ -936,10 +392,8 @@ def evaluate_ablation(
         recall_score(target_gather, preds, average="macro", zero_division=0)
     )
 
-    # -------------------------------------------------
+    
     # Per-class metrics
-    # -------------------------------------------------
-
     labels = np.unique(target_gather)
 
     precision_c, recall_c, f1_c, support_c = precision_recall_fscore_support(
@@ -960,10 +414,8 @@ def evaluate_ablation(
             "f1": float(f1_c[i]),
         }
 
-    # -------------------------------------------------
+    
     # AUROC / AUPRC
-    # -------------------------------------------------
-
     present = np.unique(target_gather.astype(int))
 
     if present.size < 2:
@@ -1047,10 +499,8 @@ def evaluate(model, criterion, loader, device):
             pred_gather.append(output.detach().cpu().numpy())
             target_gather.append(target.detach().cpu().numpy())
 
-    # -------------------------------------------------
+    
     # Concatenate
-    # -------------------------------------------------
-
     pred_gather = np.concatenate(pred_gather)
     target_gather = np.concatenate(target_gather)
 
@@ -1059,10 +509,8 @@ def evaluate(model, criterion, loader, device):
     total_samples = len(target_gather)
     avg_loss = total_loss / len(loader)
 
-    # -------------------------------------------------
+    
     # Global Metrics
-    # -------------------------------------------------
-
     accuracy = float((preds == target_gather).mean())
 
     f1_weighted = float(
@@ -1084,10 +532,8 @@ def evaluate(model, criterion, loader, device):
         recall_score(target_gather, preds, average="macro", zero_division=0)
     )
 
-    # -------------------------------------------------
+    
     # Per-class metrics
-    # -------------------------------------------------
-
     labels = np.unique(target_gather)
 
     precision_c, recall_c, f1_c, support_c = precision_recall_fscore_support(
@@ -1108,10 +554,8 @@ def evaluate(model, criterion, loader, device):
             "f1": float(f1_c[i]),
         }
 
-    # -------------------------------------------------
+    
     # AUROC / AUPRC
-    # -------------------------------------------------
-
     present = np.unique(target_gather.astype(int))
 
     if present.size < 2:
@@ -1139,16 +583,12 @@ def evaluate(model, criterion, loader, device):
             )
         )
 
-    # -------------------------------------------------
+    
     # Confusion Matrix
-    # -------------------------------------------------
-
     cm = confusion_matrix(target_gather, preds, labels=labels)
 
-    # -------------------------------------------------
+    
     # Structured output
-    # -------------------------------------------------
-
     results = {
         "summary": {
             "num_samples": int(total_samples),
@@ -1290,35 +730,7 @@ def main():
 
     check_zero_rates(train_loader)
     check_zero_rates(test_loader)
-    # raise ValueError
-    # Load the model
-    # model = LinearProbe(args.mri_embed_dim + args.histo_embed_dim, args.num_classes)
-    # model = MultimodalClassifier(in_channels_rad=args.mri_embed_dim, in_channels_histo=args.histo_embed_dim,  hidden_dim = 512, num_classes = args.num_classes)
-
-    # model = ResidualFusionClassifier(
-    #     mri_probe_path=args.mri_probe_path,
-    #     histo_probe_path=args.histo_probe_path,
-    #     residual_hidden= 32,
-    #     freeze_probes = True,
-    #     device = "cuda",
-    # )
-
-    # model = GatedResidualFusion(
-    #             mri_probe_path=args.mri_probe_path,
-    #             histo_probe_path=args.histo_probe_path,)
-                #  residual_hidden=64, freeze_probes=True, device="cuda")
-
-
-    # model = AdditiveGatedFusion(
-    #             mri_probe_path=args.mri_probe_path,
-    #             histo_probe_path=args.histo_probe_path,
-    #              bottleneck_dim=16, freeze_probes=False, device="cuda")
-
-
-    # model = LatentAdditiveFusion(
-        # mri_probe_path=args.mri_probe_path,
-        #         histo_probe_path=args.histo_probe_path,
-    # )
+   
  
     model = RobustGatedFusion(mri_probe_path=args.mri_probe_path,
                 histo_probe_path=args.histo_probe_path, 
