@@ -1,0 +1,184 @@
+subject_id,level1_label,level1_true,lgghgg_label,lgghgg_true,who_grade_label,who_grade_true,histopathology_present,mri_present
+CoReBT-0037,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0038,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0039,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0040,3,Other / NEC,1,HGG,1,3,False,True
+CoReBT-0041,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,True,True
+CoReBT-0042,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0043,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0044,2,Non-diffuse / Pediatric / Midline Glioma,0,LGG,0,2,False,True
+CoReBT-0045,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0046,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0047,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0048,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,True,True
+CoReBT-0049,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0050,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0051,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0052,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0053,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0054,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0055,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0056,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0057,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0058,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0059,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0060,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0061,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0062,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,True,True
+CoReBT-0063,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,True,False
+CoReBT-0064,0,GBM / IDH-wt HGG,1,HGG,1,3,False,True
+CoReBT-0066,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0067,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0068,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0069,2,Non-diffuse / Pediatric / Midline Glioma,0,LGG,0,2,False,True
+CoReBT-0070,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0071,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0072,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0073,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0074,2,Non-diffuse / Pediatric / Midline Glioma,0,LGG,0,2,False,True
+CoReBT-0075,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0076,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0077,2,Non-diffuse / Pediatric / Midline Glioma,0,LGG,0,2,False,True
+CoReBT-0078,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0079,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0080,0,GBM / IDH-wt HGG,1,HGG,2,4,True,False
+CoReBT-0081,0,GBM / IDH-wt HGG,1,HGG,2,4,True,False
+CoReBT-0082,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0083,3,Other / NEC,1,HGG,2,4,False,True
+CoReBT-0084,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0085,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0086,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0087,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0088,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0089,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0090,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0091,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0092,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0093,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,True,False
+CoReBT-0094,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0095,0,GBM / IDH-wt HGG,1,HGG,2,4,True,False
+CoReBT-0096,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0097,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0099,0,GBM / IDH-wt HGG,1,HGG,2,4,True,False
+CoReBT-0100,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0101,2,Non-diffuse / Pediatric / Midline Glioma,1,HGG,2,4,True,True
+CoReBT-0102,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0103,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0104,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0105,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0106,2,Non-diffuse / Pediatric / Midline Glioma,0,LGG,0,2,False,True
+CoReBT-0107,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0108,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0109,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0110,3,Other / NEC,0,LGG,0,2,False,True
+CoReBT-0111,3,Other / NEC,0,LGG,0,2,False,True
+CoReBT-0112,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0113,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0114,2,Non-diffuse / Pediatric / Midline Glioma,1,HGG,2,4,False,True
+CoReBT-0115,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0116,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0117,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0118,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0119,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0120,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,True,True
+CoReBT-0121,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0122,0,GBM / IDH-wt HGG,1,HGG,2,4,True,False
+CoReBT-0123,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0124,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0125,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0126,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0127,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0128,2,Non-diffuse / Pediatric / Midline Glioma,0,LGG,0,2,False,True
+CoReBT-0130,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0131,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0132,0,GBM / IDH-wt HGG,1,HGG,2,4,True,False
+CoReBT-0133,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,True,True
+CoReBT-0134,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0135,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0136,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0137,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0138,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0139,2,Non-diffuse / Pediatric / Midline Glioma,1,HGG,2,4,True,True
+CoReBT-0140,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0141,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0142,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0143,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0144,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0145,2,Non-diffuse / Pediatric / Midline Glioma,0,LGG,0,2,False,True
+CoReBT-0146,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0147,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0148,0,GBM / IDH-wt HGG,1,HGG,2,4,True,False
+CoReBT-0149,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0150,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0151,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0152,0,GBM / IDH-wt HGG,1,HGG,2,4,True,False
+CoReBT-0153,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0154,2,Non-diffuse / Pediatric / Midline Glioma,0,LGG,0,2,True,False
+CoReBT-0155,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,True,True
+CoReBT-0156,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,True,True
+CoReBT-0157,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,True,True
+CoReBT-0158,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,True,True
+CoReBT-0159,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0160,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,True,True
+CoReBT-0161,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0162,3,Other / NEC,0,LGG,0,2,False,True
+CoReBT-0163,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0164,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0165,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0166,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0167,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0168,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0169,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0171,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0172,0,GBM / IDH-wt HGG,1,HGG,2,4,True,False
+CoReBT-0173,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0174,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,True,False
+CoReBT-0175,2,Non-diffuse / Pediatric / Midline Glioma,1,HGG,2,4,False,True
+CoReBT-0176,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0177,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0178,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0179,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0180,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,True,False
+CoReBT-0181,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0182,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0183,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0184,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,True,True
+CoReBT-0185,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0186,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0187,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0188,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0189,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0190,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0191,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0192,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0193,0,GBM / IDH-wt HGG,1,HGG,2,4,True,False
+CoReBT-0194,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0195,0,GBM / IDH-wt HGG,1,HGG,2,4,True,False
+CoReBT-0196,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0197,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0198,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0199,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0200,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0201,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0202,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0203,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0204,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0205,2,Non-diffuse / Pediatric / Midline Glioma,1,HGG,2,4,False,True
+CoReBT-0206,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0207,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0208,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0209,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0210,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0211,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0212,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
+CoReBT-0213,1,IDH-mutant Diffuse Glioma,1,HGG,1,3,False,True
+CoReBT-0214,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0215,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0216,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0217,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0218,3,Other / NEC,1,HGG,1,3,False,True
+CoReBT-0219,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0220,1,IDH-mutant Diffuse Glioma,1,HGG,2,4,False,True
+CoReBT-0221,0,GBM / IDH-wt HGG,1,HGG,2,4,True,True
+CoReBT-0222,0,GBM / IDH-wt HGG,1,HGG,2,4,False,True
+CoReBT-0223,1,IDH-mutant Diffuse Glioma,0,LGG,0,2,False,True
