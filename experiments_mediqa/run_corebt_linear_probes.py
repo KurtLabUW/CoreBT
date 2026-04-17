@@ -6,7 +6,7 @@ from datetime import datetime
 COMMON_ARGS = {
     "--batch_size": 32,
     # "--train_iters": 1200,
-    "--train_iters": 600,
+    "--train_iters": 400,
     "--lr": 0.0001, 
     "--min_lr": 0.0,
     "--optim": "adam",

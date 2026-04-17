@@ -241,6 +241,8 @@ def train(model,
 
     try:
         plt.show()
+        plt.savefig(f'{output_dir}/metrics_plot.py')
+
     except Exception as e:
         print(f"Plotext failed to render: {e}")
         
@@ -696,7 +698,7 @@ if __name__ == '__main__':
 # OUTPUT_DIR=run/histopathology
 # EMBED_DIM=768
 # BATCH_SIZE=32
-# TRAIN_ITERS=600
+# TRAIN_ITERS=400
 # LR=0.001
 # MIN_LR=0.0
 # OPTIM=adam

@@ -87,22 +87,6 @@ LABEL_PREFIX="all" # choices: level1, lgghgg, who_grade, all
 ```
 
 
-### All models training with `run_corebt_linear_probes.py`
-```bash
-uv run python run_corebt_linear_probes.py \
-    --train_csv_path "$TRAIN_CSV" \
-    --val_csv_path "$VAL_CSV" \
-    --test_csv_path "$TEST_CSV" \
-    --train_mri_embed_path "$TRAIN_MRI" \
-    --val_mri_embed_path "$VAL_MRI" \
-    --test_mri_embed_path "$TEST_MRI" \
-    --train_histo_embed_path "$TRAIN_HISTO" \
-    --val_histo_embed_path "$VAL_HISTO" \
-    --test_histo_embed_path "$TEST_HISTO" \
-    --output_dir "$OUTPUT_DIR" \
-    --label_prefix "$LABEL_PREFIX" \
-    --variant "all" # choices=["mri", "histo", "fusion", "all"], default="all"
-```
 
 ### MRI linear probe training with `corebt_mri_main.py`
 
@@ -182,6 +166,24 @@ uv run corebt_fusion_main.py \
     --num_workers $NUM_WORKERS \
     --seed $SEED \
     --output_dir "$OUTPUT_DIR/fusion"
+```
+
+
+### All models training with `run_corebt_linear_probes.py`
+```bash
+uv run python run_corebt_linear_probes.py \
+    --train_csv_path "$TRAIN_CSV" \
+    --val_csv_path "$VAL_CSV" \
+    --test_csv_path "$TEST_CSV" \
+    --train_mri_embed_path "$TRAIN_MRI" \
+    --val_mri_embed_path "$VAL_MRI" \
+    --test_mri_embed_path "$TEST_MRI" \
+    --train_histo_embed_path "$TRAIN_HISTO" \
+    --val_histo_embed_path "$VAL_HISTO" \
+    --test_histo_embed_path "$TEST_HISTO" \
+    --output_dir "$OUTPUT_DIR" \
+    --label_prefix "$LABEL_PREFIX" \
+    --variant "all" # choices=["mri", "histo", "fusion", "all"], default="all"
 ```
 
 
