@@ -24,7 +24,7 @@ def build_mri_config(args):
     return {
         "name": "mri_only",
         "command": [
-            "python3",
+            "uv", "run", "python",
             "corebt_mri_main.py",
         ],
         "args": {
@@ -49,7 +49,7 @@ def build_histo_config(args):
     return {
         "name": "histo_only",
         "command": [
-            "python3",
+            "uv", "run", "python",
             "corebt_histo_main.py",
         ],
         "args": {
@@ -74,7 +74,7 @@ def build_fusion_config(args):
     return {
         "name": "fusion_mri_histo",
         "command": [
-            "python3",
+            "uv", "run", "python",
             "corebt_fusion_main.py",
         ],
         "args": {
