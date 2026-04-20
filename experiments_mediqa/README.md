@@ -22,20 +22,33 @@ uv sync
 uv run python -c "import torch; print(f'Torch: {torch.__version__} | CUDA Available: {torch.cuda.is_available()}')"
 ```
 
+
 ## Prerequisites
-Download the embeddings files, and create the dataset CSVs with the subject_id and the label headers. For examples look at `dataset_csvs`. 
 
-> Note that within `dataset_csvs`, only `train.csv` contains correct labels, while the rest contain random labels.
+### 1. Download embeddings
+Download the necessary embeddings and dataset CSVs. Ensure your CSV files contain the required headers (`subject_id` and *_label).
 
-The minimal dataset csv should be structured like this:
+> **Note:** Within `dataset_csvs`, only `train.csv` contains verified labels. Other files (e.g., validation or test sets) contain placeholder random labels.
+
+### 2. Add modality presence columns to CSV
+Change the paths at the top of this script to where you downloaded the files, then run to scan for available imaging modalities and update the CSVs with presence columns. 
+
+```bash
+python utils/add_presence_columns_to_csv.py
+```
+
+After running the script, your CSV will be structured as follows:
+
 <div align="center">
 
-| subject_id | level1_label | lgghgg_label | who_grade_label |
-| :--- | :--- | :--- | :--- |
-| CoReBT-0037 | 3 | 0 | 0 |
-| CoReBT-0038 | 2 | 1 | 1 |
-| ... | ... | ... | ... |
+| subject_id | level1_label | lgghgg_label | who_grade_label | histopathology_present | mri_present |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| CoReBT-0037 | 3 | 0 | 0 | False | True |
+| CoReBT-0038 | 2 | 1 | 1 | True | True |
+| ... | ... | ... | ... | ... | ... |
 </div>
+
+For further reference, see the examples provided in the `dataset_csvs` directory.
 
 
 ## Example commands
