@@ -25,16 +25,16 @@ uv run python -c "import torch; print(f'Torch: {torch.__version__} | CUDA Availa
 
 ## Prerequisites
 
-### 1. Download embeddings
+###  Download embeddings
 Download the necessary embeddings and dataset CSVs. Ensure your CSV files contain the required headers (`subject_id` and *_label).
 
 > **Note:** Within `dataset_csvs`, only `train.csv` contains verified labels. Other files (e.g., validation or test sets) contain placeholder random labels.
 
-### 2. Add modality presence columns to CSV
-Change the paths at the top of this script to where you downloaded the files, then run to scan for available imaging modalities and update the CSVs with presence columns. 
+### Add modality presence columns to CSV
+Update the file paths within `utils/add_presence_columns_to_csv.py` to point to your local data directories, then run to scan for available imaging modalities and update the CSVs with presence columns. 
 
 ```bash
-python utils/add_presence_columns_to_csv.py
+uv run utils/add_presence_columns_to_csv.py
 ```
 
 After running the script, your CSV will be structured as follows:
